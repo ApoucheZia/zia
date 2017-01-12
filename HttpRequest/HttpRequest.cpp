@@ -43,7 +43,7 @@ void apouche::HttpRequest::setUriParameter(const std::string &key, const std::st
 }
 
 const std::string apouche::HttpRequest::getRequestLine() {
-    return _mapMethodFromEnum[_method] + " " + _URI + " " + getVersion();
+    return _mapMethodFromEnum.at(_method) + " " + _URI + " " + getVersion();
 }
 
 void apouche::HttpRequest::setUriParameters(const std::map<std::string, std::string> &uriParameters) {
@@ -78,32 +78,12 @@ apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody
     setHeaders(header);
     setBody(body);
 
-    _mapMethodFromEnum[Method::Post] = "POST";
-    _mapMethodFromEnum[Method::Get] = "GET";
-    _mapMethodFromEnum[Method::Options] = "OPTIONS";
-    _mapMethodFromEnum[Method::Head] = "HEAD";
-    _mapMethodFromEnum[Method::Put] = "PUT";
-    _mapMethodFromEnum[Method::Delete] = "DELETE";
-    _mapMethodFromEnum[Method::Trace] = "TRACE";
-    _mapMethodFromEnum[Method::Connect] = "CONNECT";
-    _mapMethodFromEnum[Method::UndefinedRequestMethod] = "Undefined";
-
-    _mapMethodFromName["GET"] = Method::Get;
-    _mapMethodFromName["POST"] = Method::Post;
-    _mapMethodFromName["OPTIONS"] = Method::Options;
-    _mapMethodFromName["HEAD"] = Method::Head;
-    _mapMethodFromName["PUT"] = Method::Put;
-    _mapMethodFromName["DELETE"] = Method::Delete;
-    _mapMethodFromName["TRACE"] = Method::Trace;
-    _mapMethodFromName["CONNECT"] = Method::Connect;
-    _mapMethodFromName["UNDEFINED"] = Method::UndefinedRequestMethod;
-
     std::istringstream ss(message);
     std::string token;
 
     std::getline(ss, token, ' ');
 
-    setMethod(_mapMethodFromName[token]);
+    setMethod(_mapMethodFromName.at(token));
 
     std::getline(ss, token, ' ');
     setURI(token);
@@ -143,3 +123,27 @@ apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody
     std::getline(ss, token);
     iHttpBody->setBody(token);
 }
+
+const std::map <apouche::Method,  std::string> apouche::HttpRequest::_mapMethodFromEnum = {
+    {Method::Post, "POST"},
+    {Method::Get, "GET"},
+    {Method::Options, "OPTIONS"},
+    {Method::Head, "HEAD"},
+    {Method::Put, "PUT"},
+    {Method::Delete, "DELETE"},
+    {Method::Trace, "TRACE"},
+    {Method::Connect, "CONNECT"},
+    {Method::UndefinedRequestMethod, "UNDEFINED"}
+};
+
+const std::map <std::string, apouche::Method> apouche::HttpRequest::_mapMethodFromName = {
+    {"GET", Method::Get},
+    {"POST", Method::Post},
+    {"OPTIONS", Method::Options},
+    {"HEAD", Method::Head},
+    {"PUT", Method::Put},
+    {"DELETE", Method::Delete},
+    {"TRACE", Method::Trace},
+    {"CONNECT", Method::Connect},
+    {"UNDEFINED", Method::UndefinedRequestMethod},
+};
