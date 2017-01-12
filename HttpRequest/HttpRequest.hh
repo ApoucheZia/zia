@@ -31,8 +31,8 @@ namespace apouche {
         apouche::Method _method; /*!< apouche::Method. Type of method, may be post, get, etc */
         std::string _URI; /*!< std::string. complete uri */
         std::map <std::string,  std::string> _uriParameters; /*!< std::map <std::string,  std::string>. get parameters in the uri */
-        std::map <apouche::Method,  std::string> _mapMethodFromEnum; /*!< std::map <apouche::Method,  std::string>. get std::string from apouche::Method */
-        std::map <std::string, apouche::Method> _mapMethodFromName; /*!< std::map <std::string, apouche::Method>. get apouche::Method from std::string */
+        static const std::map <apouche::Method,  std::string> _mapMethodFromEnum; /*!< std::map <apouche::Method,  std::string>. get std::string from apouche::Method */
+        static const std::map <std::string, apouche::Method> _mapMethodFromName; /*!< std::map <std::string, apouche::Method>. get apouche::Method from std::string */
     public:
         /*!
         *  \brief Construct an HttpRequest
