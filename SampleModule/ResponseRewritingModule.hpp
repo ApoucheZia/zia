@@ -34,10 +34,6 @@ namespace apouche {
             }
             return false;
         };
-
-        AModule *instantiate() const{
-            return new ResponseRewritingModule();
-        }
     };
     extern "C" apouche::AModule *instantiate(){
         return new ResponseRewritingModule();

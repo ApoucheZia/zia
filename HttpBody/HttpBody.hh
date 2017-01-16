@@ -38,7 +38,7 @@ namespace apouche {
             *
             *  \return std::string data of the HttpBody,
             */
-            const std::string &getBody();
+            const std::string &getBody() const override;
             /*!
             *  \brief set data of HttpBody
             *
@@ -46,7 +46,7 @@ namespace apouche {
             *
             *  \return void,
             */
-            void setBody(const std::string &);
+            void setBody(const std::string &) override;
         private:
             std::string _body;  /*!< any type of data in the http body*/
     };

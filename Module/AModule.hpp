@@ -118,14 +118,6 @@ namespace apouche {
         *  \return void
         */
         virtual void    registerEvents(EventHandler *) = 0;
-        /*!
-        *  \brief Instantiates a Module
-        *
-        *  Instantiates a Module
-        *
-        *  \return a pointer to the Module
-        */
-        virtual AModule *instantiate() const = 0;
 
     protected:
         Logger      _logger;

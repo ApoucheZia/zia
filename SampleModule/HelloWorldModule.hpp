@@ -32,10 +32,6 @@ namespace apouche {
         void hello_world() {
             _logger.debug(_name + " v" + _version + ": Hello World !");
         };
-
-        AModule *instantiate() const{
-            return new HelloWorldModule();
-        }
     };
 
     extern "C" apouche::AModule *instantiate(){

@@ -38,7 +38,7 @@ namespace apouche {
             *
             *  \return std::map<std::string, std::string> data of the HttpHeader
             */
-            std::map<std::string, std::string> getAllHeader();
+            const std::map<std::string, std::string> &getAllHeader() const override ;
             /*!
             *  \brief Set map of header object
             *
@@ -47,7 +47,7 @@ namespace apouche {
             *  \param header : the header of the http request or response, in key, value format
             *  \return void
             */
-            void setAllHeaders(const std::map<std::string, std::string> &);
+            void setAllHeaders(const std::map<std::string, std::string> &) override;
             /*!
             *  \brief Get value of a specific key of the Header
             *
@@ -56,16 +56,17 @@ namespace apouche {
             *  \param key : the header key of the http request or response, each key contains a value
             *  \return std::string, value of the key
             */
-            const std::string &getHeader(const std::string &);
+            const std::string &getHeader(const std::string &key) const override;
             /*!
             *  \brief set value of a specific key
             *
             *  Set value of a specific key
             *
-            *  \param key : the header key of the http request or response each key contains a value, value : data associated with the key
+            *  \param key : the header key of the http request or response each key contains a value
+            *  \param value : data associated with the key
             *  \return void
             */
-            void setHeader(const std::string &, const std::string &);
+            void setHeader(const std::string &key, const std::string &value) override;
             /*!
             *  \brief Remove a key and value from the map
             *
@@ -74,7 +75,7 @@ namespace apouche {
             *  \param key : the header key of the http request or response, each key contains a value, the key and the value are deleted from the map
             *  \return void
             */
-            void deleteHeader(const std::string &);
+            void deleteHeader(const std::string &) override;
             /*!
             *  \brief Check if a key is in the Header
             *
@@ -84,7 +85,7 @@ namespace apouche {
             *  \return true if the key is in the header,
             * false if the key is not in the header
             */
-            bool containsHeader(const std::string &);
+            bool containsHeader(const std::string &) const override;
 
         private:
             std::map<std::string, std::string> _header;
