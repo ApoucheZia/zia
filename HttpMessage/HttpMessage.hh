@@ -57,7 +57,12 @@ namespace apouche {
         *
         *  \return apouche::IHttpHeader : Your header of the request or response
         */
-        IHttpHeader *getHeaders();
+        IHttpHeader *getHeaders() override;
+        /*!
+         * \brief Constant version of getHeaders()
+         * @return apouche::IHttpHeader: Your header of the request or response
+         */
+        const IHttpHeader *getHeaders() const override;
         /*!
         *  \brief Set the IHttpHeader of your request or response
         *
@@ -66,7 +71,7 @@ namespace apouche {
         *  \param header : set the IHttpHeader of your request or response
         *  \return void
         */
-        void setHeaders(IHttpHeader *header);
+        void setHeaders(IHttpHeader *header) override;
         /*!
         *  \brief Get the IHttpBody of your message, you can give you own implementation or use our implementation.
         *
@@ -74,7 +79,12 @@ namespace apouche {
         *
         *  \return apouche::IHttpBody: Your body of the request or response
         */
-        IHttpBody *getBody();
+        IHttpBody *getBody() override;
+        /*!
+         * \brief Constant version of getBody()
+         * @return apouche::IHttpBody: Your body of the request or response
+         */
+        const IHttpBody *getBody() const override;
         /*!
         *  \brief Set the IHttpBody of your request or response
         *
@@ -83,7 +93,7 @@ namespace apouche {
         *  \param body : set the IHttpBody of your request or response
         *  \return void
         */
-        void setBody(IHttpBody *body);
+        void setBody(IHttpBody *body) override;
         /*!
         *  \brief Get the http version of your message.
         *
@@ -91,7 +101,7 @@ namespace apouche {
         *
         *  \return std::string: The http version used for your request or response
         */
-        const std::string &getVersion();
+        const std::string &getVersion() const override;
         /*!
         *  \brief Set the http version of your message.
         *
@@ -99,7 +109,7 @@ namespace apouche {
         *
         *  \param version, The http version for your request or response
         */
-        void setVersion(const std::string &version);
+        void setVersion(const std::string &version) override;
     };
 }
 

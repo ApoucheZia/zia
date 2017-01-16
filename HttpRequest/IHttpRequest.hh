@@ -43,16 +43,15 @@ namespace apouche {
         *
         *  \return apouche::Method : The type of the request, maybe post, get, etc...
         */
-        virtual const apouche::Method &getMethod()= 0;
+        virtual apouche::Method getMethod() const = 0;
         /*!
         *  \brief Set the method of the header
         *
         *  Set the method of the header
         *
         *  \param method : set the type of the request, maybe post, get, etc...
-        *  \return void
         */
-        virtual void setMethod(const apouche::Method &)= 0;
+        virtual void setMethod(apouche::Method)= 0;
         /*!
         *  \brief Get the uri
         *
@@ -60,7 +59,7 @@ namespace apouche {
         *
         *  \return std::string : complete uri of the Header
         */
-        virtual const std::string &getURI()= 0;
+        virtual const std::string &getURI() const = 0;
         /*!
         *  \brief Set the uri of the header
         *
@@ -77,7 +76,7 @@ namespace apouche {
         *  \param key : a get parameter key in the uri
         *  \return bool : true if the key have a value
         */
-        virtual const bool containsUriParameters(const std::string &)= 0;
+        virtual bool containsUriParameters(const std::string &key) const = 0;
         /*!
         *  \brief Get all get parameters in the uri
         *
@@ -85,7 +84,7 @@ namespace apouche {
         *
         *  \return std::map<std::string, std::string> : all get parameters in the uri
         */
-        virtual std::map<std::string, std::string> getUriParameters()= 0;
+        virtual const std::map<std::string, std::string> &getUriParameters() const = 0;
         /*!
         *  \brief Set all get parameters in the uri
         *
@@ -99,18 +98,19 @@ namespace apouche {
         *
         *  Check if a get parameter is in the uri
         *
-        *  \param key : a get parameter key in the uri
+        *  \param key : a GET parameter key in the uri
         *  \return std::string : value of the key
         */
-        virtual const std::string &getUriParameter(const std::string &)= 0;
+        virtual const std::string &getUriParameter(const std::string &key) const = 0;
         /*!
         *  \brief Set a get parameters in the uri
         *
         *  Set a get parameters in the uri
         *
-        *  \param key : a get parameter key in the uri, value : a get parameters value in the uri
+        *  \param key : a GET parameter key in the uri
+         * \param value : a GET parameters value in the uri
         */
-        virtual void setUriParameter(const std::string &, const std::string &)= 0;
+        virtual void setUriParameter(const std::string &key, const std::string &value)= 0;
         /*!
         *  \brief Get the request line of your request
         *
@@ -119,56 +119,6 @@ namespace apouche {
         *  \return std::string : the request line
         */
         virtual const std::string getRequestLine()= 0;
-        /*!
-        *  \brief Get the IHttpHeader of your request
-        *
-        *  Get the IHttpHeader of your request
-        *
-        *  \return apouche::IHttpHeader : Your header of the request
-        */
-        virtual IHttpHeader *getHeaders()= 0;
-        /*!
-        *  \brief Set the IHttpHeader of your request
-        *
-        *  Set the IHttpHeader of your request
-        *
-        *  \param header : set the IHttpHeader of your request
-        *  \return void
-        */
-        virtual void setHeaders(IHttpHeader *header)= 0;
-        /*!
-        *  \brief Get the IHttpBody of your request, you can give you own implementation or use our implementation.
-        *
-        *  Get the IHttpBody of your request, you can give you own implementation or use our implementation.
-        *
-        *  \return apouche::IHttpBody: Your body of the request or response
-        */
-        virtual IHttpBody *getBody()= 0;
-        /*!
-        *  \brief Set the IHttpBody of your request
-        *
-        *  Set the IHttpBody of your request
-        *
-        *  \param body : set the IHttpBody of your request
-        *  \return void
-        */
-        virtual void setBody(IHttpBody *body)= 0;
-        /*!
-        *  \brief Get the http version of your request.
-        *
-        *  Get the http version of your request.
-        *
-        *  \return std::string: The http version used for your request
-        */
-        virtual const std::string &getVersion()= 0;
-        /*!
-        *  \brief Set the http version of your request.
-        *
-        *  Set the http version of your request.
-        *
-        *  \param version, The http version for your request
-        */
-        virtual void setVersion(const std::string &version)= 0;
     };
 }
 

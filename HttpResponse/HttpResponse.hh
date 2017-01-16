@@ -47,7 +47,7 @@ namespace apouche {
             *  \param void
             *  \return apouche::StatusCode, status code
             */
-        const apouche::StatusCode &getStatus();
+        apouche::StatusCode getStatus() const override;
         /*!
             *  \brief Set status code
             *
@@ -56,7 +56,7 @@ namespace apouche {
             *  \param status code : apouche::StatusCode
             *  \return void
             */
-        void setStatus(const apouche::StatusCode &);
+        void setStatus(apouche::StatusCode) override;
         /*!
             *  \brief Get status code description
             *
@@ -65,7 +65,7 @@ namespace apouche {
             *  \param void
             *  \return std::string, description status code
             */
-        const std::string getStatusDescription();
+        const std::string &getStatusDescription() const override;
         /*!
             *  \brief Get the description of the status code
             *
@@ -74,7 +74,7 @@ namespace apouche {
             *  \param void
             *  \return std::string, the status of response
             */
-        const std::string getResponseLine();
+        const std::string getResponseLine() const override;
         /*!
         *  \brief Get the IHttpHeader of your response
         *
@@ -82,7 +82,12 @@ namespace apouche {
         *
         *  \return apouche::IHttpHeader : Your header of the response
         */
-        IHttpHeader *getHeaders();
+        IHttpHeader *getHeaders() override;
+        /*!
+         * \brief Constant version of getHeaders()
+         * @return apouche::IHttpHeader: Your header of the request or response
+         */
+        const IHttpHeader *getHeaders() const override;
         /*!
         *  \brief Set the IHttpHeader of your response
         *
@@ -91,7 +96,7 @@ namespace apouche {
         *  \param header : set the IHttpHeader of your response
         *  \return void
         */
-        void setHeaders(IHttpHeader *header);
+        void setHeaders(IHttpHeader *header) override;
         /*!
         *  \brief Get the IHttpBody of your response, you can give you own implementation or use our implementation.
         *
@@ -99,7 +104,12 @@ namespace apouche {
         *
         *  \return apouche::IHttpBody: Your body of the response or response
         */
-        IHttpBody *getBody();
+        IHttpBody *getBody() override;
+        /*!
+         * \brief Constant version of getBody()
+         * @return apouche::IHttpBody: Your body of the request or response
+         */
+        const IHttpBody *getBody() const override;
         /*!
         *  \brief Set the IHttpBody of your response
         *
@@ -108,7 +118,7 @@ namespace apouche {
         *  \param body : set the IHttpBody of your response
         *  \return void
         */
-        void setBody(IHttpBody *body);
+        void setBody(IHttpBody *body) override;
         /*!
         *  \brief Get the http version of your response.
         *
@@ -116,7 +126,7 @@ namespace apouche {
         *
         *  \return std::string: The http version used for your response
         */
-        const std::string &getVersion();
+        const std::string &getVersion() const override;
         /*!
         *  \brief Set the http version of your response.
         *
@@ -124,7 +134,7 @@ namespace apouche {
         *
         *  \param version, The http version for your response
         */
-        void setVersion(const std::string &version);
+        void setVersion(const std::string &version) override;
     private:
         IHttpHeader *_header; /*!< apouche::IHttpHeader. Http header of your Response */
         IHttpBody *_body; /*!< apouche::IHttpBody. Http body of your Response */
