@@ -22,11 +22,11 @@ namespace apouche {
             _logger.info(_name + " v" + _version + ": Event registering -> Response rewriting");
 
             auto function = std::bind(&ResponseRewritingModule::rewrite_response, this, std::placeholders::_1, std::placeholders::_2);
-            Event<bool, IHttpResponse *, IHttpConf *> _event("Response Rewriting", Weight::HIGH, function);
+            Event<bool, HttpResponse *, IHttpConf *> _event("Response Rewriting", Weight::HIGH, function);
             _handler->_beforeSendResponse.addEvent(_event);
         };
 
-        bool rewrite_response(IHttpResponse *response, IHttpConf *conf) {
+        bool rewrite_response(HttpResponse *response, IHttpConf *conf) {
             if (conf->getConf("module.response.rewriting") == "true")
             {
                 response->getBody()->setBody("Rewritten Body !");
@@ -34,7 +34,14 @@ namespace apouche {
             }
             return false;
         };
+
+        AModule *instantiate() const{
+            return new ResponseRewritingModule();
+        }
     };
+    extern "C" apouche::AModule *instantiate(){
+        return new ResponseRewritingModule();
+    }
 }
 
 #endif //ZIA_MYMODULE_HH

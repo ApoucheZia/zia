@@ -1,5 +1,7 @@
 #include "EventHandler/EventHandler.hpp"
 #include "SampleModule/HelloWorldModule.hpp"
+#include "HttpHeader/HttpHeader.hh"
+#include "HttpBody/HttpBody.hh"
 
 int	main() {
   apouche::HelloWorldModule module;

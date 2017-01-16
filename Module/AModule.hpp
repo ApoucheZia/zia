@@ -8,7 +8,7 @@
 /*!
  * \file HttpHeader.hh
  * \brief Http Object Header, contains header of a request or response
- * \author Kevin Mallot
+ * \author Kevin Malot
  * \version 0.1
  */
 
@@ -62,7 +62,7 @@ namespace apouche {
         *  \param void
         *  \return std::string, name of module
         */
-        const   std::string &getName(){
+        const   std::string &getName() const{
             return _name;
         };
         /*!
@@ -84,7 +84,7 @@ namespace apouche {
         *  \param void
         *  \return std::string, description of module
         */
-        const   std::string &getDesc(){
+        const   std::string &getDesc() const{
             return _desc;
         };
         /*!
@@ -106,7 +106,7 @@ namespace apouche {
         *  \param void
         *  \return std::string, version of module
         */
-        const   std::string &getVersion(){
+        const   std::string &getVersion() const{
             return _version;
         };
         /*!
@@ -118,6 +118,14 @@ namespace apouche {
         *  \return void
         */
         virtual void    registerEvents(EventHandler *) = 0;
+        /*!
+        *  \brief Instantiates a Module
+        *
+        *  Instantiates a Module
+        *
+        *  \return a pointer to the Module
+        */
+        virtual AModule *instantiate() const = 0;
 
     protected:
         Logger      _logger;

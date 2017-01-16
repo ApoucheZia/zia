@@ -20,11 +20,9 @@ set(SOURCE_FILES
     HttpRequest/HttpRequest.cpp
     HttpRequest/HttpRequest.hh
     HttpRequest/HttpRequestTest.cpp
-    HttpRequest/IHttpRequest.hh
-    HttpResponse/HttpResponse.cpp
+        HttpResponse/HttpResponse.cpp
     HttpResponse/HttpResponse.hh
-    HttpResponse/IHttpResponse.hh
-    Logger/FileLogger.cpp
+        Logger/FileLogger.cpp
     Logger/FileLogger.hh
     Logger/FileLoggerTest.cpp
     Logger/Logger.cpp
@@ -34,6 +32,7 @@ set(SOURCE_FILES
     SampleModule/ResponseRewritingModule.hpp
     Enum.hh
     main.cpp
-    README.md)
+    README.md
+        )
 
 add_executable(zia ${SOURCE_FILES})
