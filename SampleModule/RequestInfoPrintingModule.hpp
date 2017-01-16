@@ -38,9 +38,6 @@ namespace apouche {
 
             _logger.debug(_name + " v" + _version + ": " + "Body : " + request->getBody()->getBody());
         };
-        AModule *instantiate() const {
-            return new RequestInfoPrintingModule();
-        }
     };
     extern "C" apouche::AModule *instantiate(){
         return new RequestInfoPrintingModule();
