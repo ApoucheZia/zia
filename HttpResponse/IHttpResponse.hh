@@ -44,7 +44,7 @@ namespace apouche {
             *  \param void
             *  \return apouche::StatusCode, status code
             */
-        virtual const apouche::StatusCode &getStatus()= 0;
+        virtual apouche::StatusCode getStatus() const = 0;
         /*!
             *  \brief Set status code
             *
@@ -53,7 +53,7 @@ namespace apouche {
             *  \param status code : apouche::StatusCode
             *  \return void
             */
-        virtual void setStatus(const apouche::StatusCode &)= 0;
+        virtual void setStatus(apouche::StatusCode)= 0;
         /*!
             *  \brief Get status code description
             *
@@ -62,7 +62,7 @@ namespace apouche {
             *  \param void
             *  \return std::string, description status code
             */
-        virtual const std::string getStatusDescription()= 0;
+        virtual const std::string &getStatusDescription() const = 0;
         /*!
             *  \brief Get the description of the status code
             *
@@ -71,57 +71,7 @@ namespace apouche {
             *  \param void
             *  \return std::string, the status of response
             */
-        virtual const std::string getResponseLine()= 0;
-        /*!
-        *  \brief Get the IHttpHeader of your response
-        *
-        *  Get the IHttpHeader of your response
-        *
-        *  \return apouche::IHttpHeader : Your header of the response
-        */
-        virtual IHttpHeader *getHeaders()= 0;
-        /*!
-        *  \brief Set the IHttpHeader of your response
-        *
-        *  Set the IHttpHeader of your response
-        *
-        *  \param header : set the IHttpHeader of your response
-        *  \return void
-        */
-        virtual void setHeaders(IHttpHeader *header)= 0;
-        /*!
-        *  \brief Get the IHttpBody of your response, you can give you own implementation or use our implementation.
-        *
-        *  Get the IHttpBody of your response, you can give you own implementation or use our implementation.
-        *
-        *  \return apouche::IHttpBody: Your body of the response or response
-        */
-        virtual IHttpBody *getBody()= 0;
-        /*!
-        *  \brief Set the IHttpBody of your response
-        *
-        *  Set the IHttpBody of your response
-        *
-        *  \param body : set the IHttpBody of your response
-        *  \return void
-        */
-        virtual void setBody(IHttpBody *body)= 0;
-        /*!
-        *  \brief Get the http version of your response.
-        *
-        *  Get the http version of your response.
-        *
-        *  \return std::string: The http version used for your response
-        */
-        virtual const std::string &getVersion()= 0;
-        /*!
-        *  \brief Set the http version of your response.
-        *
-        *  Set the http version of your response.
-        *
-        *  \param version, The http version for your response
-        */
-        virtual void setVersion(const std::string &version)= 0;
+        virtual const std::string getResponseLine() const = 0;
     };
 }
 

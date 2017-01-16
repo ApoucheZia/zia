@@ -41,6 +41,11 @@ namespace apouche {
         */
         virtual IHttpHeader *getHeaders()= 0;
         /*!
+         * \brief Constant version of getHeaders()
+         * @return apouche::IHttpHeader: Your header of the request or response
+         */
+        virtual const IHttpHeader *getHeaders() const = 0;
+        /*!
         *  \brief Set the IHttpHeader of your request or response
         *
         *  Set the IHttpHeader of your request or response
@@ -58,6 +63,11 @@ namespace apouche {
         */
         virtual IHttpBody *getBody()= 0;
         /*!
+         * \brief Constant version of getBody()
+         * @return apouche::IHttpBody: Your body of the request or response
+         */
+        virtual const IHttpBody *getBody() const = 0;
+        /*!
         *  \brief Set the IHttpBody of your request or response
         *
         *  Set the IHttpBody of your request or response
@@ -73,7 +83,7 @@ namespace apouche {
         *
         *  \return std::string: The http version used for your request or response
         */
-        virtual const std::string &getVersion()= 0;
+        virtual const std::string &getVersion() const = 0;
         /*!
         *  \brief Set the http version of your message.
         *

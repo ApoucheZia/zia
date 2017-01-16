@@ -8,19 +8,23 @@ apouche::HttpResponse::~HttpResponse() {
 
 }
 
-const apouche::StatusCode & apouche::HttpResponse::getStatus() {
+apouche::StatusCode apouche::HttpResponse::getStatus() const {
     return _status;
 }
 
-void apouche::HttpResponse::setStatus(const apouche::StatusCode &status) {
+void apouche::HttpResponse::setStatus(apouche::StatusCode status) {
     _status = status;
 }
 
-const std::string apouche::HttpResponse::getResponseLine() {
-    return _status + " " + _message[_status];
+const std::string apouche::HttpResponse::getResponseLine() const {
+    return _status + " " + _message.at(_status);
 }
 
 apouche::IHttpHeader *apouche::HttpResponse::getHeaders() {
+    return _header;
+}
+
+const apouche::IHttpHeader *apouche::HttpResponse::getHeaders() const {
     return _header;
 }
 
@@ -32,11 +36,15 @@ apouche::IHttpBody *apouche::HttpResponse::getBody() {
     return _body;
 }
 
+const apouche::IHttpBody *apouche::HttpResponse::getBody() const {
+    return _body;
+}
+
 void apouche::HttpResponse::setBody(IHttpBody *body) {
     _body = body;
 }
 
-const std::string &apouche::HttpResponse::getVersion() {
+const std::string &apouche::HttpResponse::getVersion() const {
     return _version;
 }
 
@@ -97,6 +105,6 @@ apouche::HttpResponse::HttpResponse(apouche::IHttpHeader *header, apouche::IHttp
     _message[StatusCode::HTTPVersionNotSupported] = "HTTPVersionNotSupported";
 }
 
-const std::string apouche::HttpResponse::getStatusDescription() {
-    return _message[_status];
+const std::string &apouche::HttpResponse::getStatusDescription() const {
+    return _message.at(_status);
 }

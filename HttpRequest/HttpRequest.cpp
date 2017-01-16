@@ -10,15 +10,15 @@ apouche::HttpRequest::~HttpRequest() {
 
 }
 
-const apouche::Method &apouche::HttpRequest::getMethod() {
+apouche::Method apouche::HttpRequest::getMethod() const {
     return _method;
 }
 
-void apouche::HttpRequest::setMethod(const apouche::Method &method) {
+void apouche::HttpRequest::setMethod(apouche::Method method) {
     _method = method;
 }
 
-const std::string &apouche::HttpRequest::getURI() {
+const std::string &apouche::HttpRequest::getURI() const {
     return _URI;
 }
 
@@ -26,16 +26,16 @@ void apouche::HttpRequest::setURI(const std::string &URI) {
     _URI = URI;
 }
 
-const bool apouche::HttpRequest::containsUriParameters(const std::string &key) {
+bool apouche::HttpRequest::containsUriParameters(const std::string &key) const {
     return !(_uriParameters.find(key) == _uriParameters.end());
 }
 
-std::map<std::string, std::string> apouche::HttpRequest::getUriParameters() {
+const std::map<std::string, std::string> &apouche::HttpRequest::getUriParameters() const {
     return _uriParameters;
 }
 
-const std::string &apouche::HttpRequest::getUriParameter(const std::string &key) {
-    return _uriParameters[key];
+const std::string &apouche::HttpRequest::getUriParameter(const std::string &key) const {
+    return _uriParameters.at(key);
 }
 
 void apouche::HttpRequest::setUriParameter(const std::string &key, const std::string &value) {
@@ -54,6 +54,10 @@ apouche::IHttpHeader *apouche::HttpRequest::getHeaders() {
     return _header;
 }
 
+const apouche::IHttpHeader *apouche::HttpRequest::getHeaders() const {
+    return _header;
+}
+
 void apouche::HttpRequest::setHeaders(IHttpHeader *header) {
     _header = header;
 }
@@ -62,11 +66,15 @@ apouche::IHttpBody *apouche::HttpRequest::getBody() {
     return _body;
 }
 
+const apouche::IHttpBody *apouche::HttpRequest::getBody() const {
+  return _body;
+}
+
 void apouche::HttpRequest::setBody(IHttpBody *body) {
     _body = body;
 }
 
-const std::string &apouche::HttpRequest::getVersion() {
+const std::string &apouche::HttpRequest::getVersion() const {
     return _version;
 }
 

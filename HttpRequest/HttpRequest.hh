@@ -56,7 +56,7 @@ namespace apouche {
         *
         *  \return apouche::Method : The type of the request, maybe post, get, etc...
         */
-        const apouche::Method &getMethod();
+        apouche::Method getMethod() const override;
         /*!
         *  \brief Set the method of the header
         *
@@ -65,7 +65,7 @@ namespace apouche {
         *  \param method : set the type of the request, maybe post, get, etc...
         *  \return void
         */
-        void setMethod(const apouche::Method &);
+        void setMethod(apouche::Method) override;
         /*!
         *  \brief Get the uri
         *
@@ -73,7 +73,7 @@ namespace apouche {
         *
         *  \return std::string : complete uri of the Header
         */
-        const std::string &getURI();
+        const std::string &getURI() const override;
         /*!
         *  \brief Set the uri of the header
         *
@@ -81,7 +81,7 @@ namespace apouche {
         *
         *  \param uri : set the uri of the request
         */
-        void setURI(const std::string &);
+        void setURI(const std::string &) override;
         /*!
         *  \brief Check if a get parameter is in the uri
         *
@@ -90,7 +90,7 @@ namespace apouche {
         *  \param key : a get parameter key in the uri
         *  \return bool : true if the key have a value
         */
-        const bool containsUriParameters(const std::string &);
+        bool containsUriParameters(const std::string &) const override;
         /*!
         *  \brief Get all get parameters in the uri
         *
@@ -98,7 +98,7 @@ namespace apouche {
         *
         *  \return std::map<std::string, std::string> : all get parameters in the uri
         */
-        std::map<std::string, std::string> getUriParameters();
+        const std::map<std::string, std::string> &getUriParameters() const override;
         /*!
         *  \brief Set all get parameters in the uri
         *
@@ -106,7 +106,7 @@ namespace apouche {
         *
         *  \param map : all get parameters in the uri
         */
-        void setUriParameters(const std::map<std::string, std::string> &);
+        void setUriParameters(const std::map<std::string, std::string> &) override;
         /*!
         *  \brief Check if a get parameter is in the uri
         *
@@ -115,7 +115,7 @@ namespace apouche {
         *  \param key : a get parameter key in the uri
         *  \return std::string : value of the key
         */
-        const std::string &getUriParameter(const std::string &);
+        const std::string &getUriParameter(const std::string &key) const override;
         /*!
         *  \brief Set a get parameters in the uri
         *
@@ -123,7 +123,7 @@ namespace apouche {
         *
         *  \param key : a get parameter key in the uri, value : a get parameters value in the uri
         */
-        void setUriParameter(const std::string &, const std::string &);
+        void setUriParameter(const std::string &, const std::string &) override;
         /*!
         *  \brief Get the request line of your request
         *
@@ -131,7 +131,7 @@ namespace apouche {
         *
         *  \return std::string : the request line
         */
-        const std::string getRequestLine();
+        const std::string getRequestLine() override;
         /*!
         *  \brief Get the IHttpHeader of your request
         *
@@ -139,7 +139,12 @@ namespace apouche {
         *
         *  \return apouche::IHttpHeader : Your header of the request
         */
-        IHttpHeader *getHeaders();
+        IHttpHeader *getHeaders() override;
+        /*!
+         * \brief Constant version of getHeaders()
+         * @return apouche::IHttpHeader: Your header of the request or response
+         */
+        const IHttpHeader *getHeaders() const override;
         /*!
         *  \brief Set the IHttpHeader of your request
         *
@@ -148,7 +153,7 @@ namespace apouche {
         *  \param header : set the IHttpHeader of your request
         *  \return void
         */
-        void setHeaders(IHttpHeader *header);
+        void setHeaders(IHttpHeader *header) override;
         /*!
         *  \brief Get the IHttpBody of your request, you can give you own implementation or use our implementation.
         *
@@ -156,7 +161,12 @@ namespace apouche {
         *
         *  \return apouche::IHttpBody: Your body of the request or response
         */
-        IHttpBody *getBody();
+        IHttpBody *getBody() override;
+        /*!
+         * \brief Constant version of getBody()
+         * @return apouche::IHttpBody: Your body of the request or response
+         */
+        const IHttpBody *getBody() const override;
         /*!
         *  \brief Set the IHttpBody of your request
         *
@@ -165,7 +175,7 @@ namespace apouche {
         *  \param body : set the IHttpBody of your request
         *  \return void
         */
-        void setBody(IHttpBody *body);
+        void setBody(IHttpBody *body) override;
         /*!
         *  \brief Get the http version of your request.
         *
@@ -173,7 +183,7 @@ namespace apouche {
         *
         *  \return std::string: The http version used for your request
         */
-        const std::string &getVersion();
+        const std::string &getVersion() const override;
         /*!
         *  \brief Set the http version of your request.
         *
@@ -181,7 +191,7 @@ namespace apouche {
         *
         *  \param version, The http version for your request
         */
-        void setVersion(const std::string &version);
+        void setVersion(const std::string &version) override;
     };
 }
 

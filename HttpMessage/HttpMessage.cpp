@@ -14,6 +14,10 @@ apouche::IHttpHeader *apouche::HttpMessage::getHeaders() {
     return _header;
 }
 
+const apouche::IHttpHeader *apouche::HttpMessage::getHeaders() const {
+    return _header;
+}
+
 void apouche::HttpMessage::setHeaders(IHttpHeader *header) {
     _header = header;
 }
@@ -22,11 +26,15 @@ apouche::IHttpBody *apouche::HttpMessage::getBody() {
     return _body;
 }
 
+const apouche::IHttpBody *apouche::HttpMessage::getBody() const {
+    return _body;
+}
+
 void apouche::HttpMessage::setBody(IHttpBody *body) {
     _body = body;
 }
 
-const std::string &apouche::HttpMessage::getVersion() {
+const std::string &apouche::HttpMessage::getVersion() const {
     return _version;
 }
 
