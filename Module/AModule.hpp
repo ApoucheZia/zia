@@ -32,7 +32,7 @@ namespace apouche {
         *
         *  Destructor of Module
         */
-        ~AModule() {
+	virtual ~AModule() {
             _logger.info("Module '" + _name + "' (" + _desc + ") v" + _version + " Destroying ...");
         };
         /*!
