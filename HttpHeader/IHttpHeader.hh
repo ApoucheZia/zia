@@ -40,7 +40,7 @@ namespace apouche {
         *  \param header : the header of the http request or response, in key, value format
         *  \return void
         */
-        virtual std::map<std::string, std::string> getAllHeader()= 0;
+        virtual const std::map<std::string, std::string> &getAllHeader() const = 0;
         /*!
         *  \brief Set map of header object
         *
@@ -58,16 +58,17 @@ namespace apouche {
         *  \param key : the header key of the http request or response, each key contains a value
         *  \return std::string, value of the key
         */
-        virtual const std::string &getHeader(const std::string &)= 0;
+        virtual const std::string &getHeader(const std::string &key) const= 0;
         /*!
         *  \brief set value of a specific key
         *
         *  Set value of a specific key
         *
-        *  \param key : the header key of the http request or response each key contains a value, value : data associated with the key
-        *  \returnvoid
+        *  \param key : the header key of the http request or response each key contains a value
+        *  \param value : data associated with the key
+        *  \return void
         */
-        virtual void setHeader(const std::string &, const std::string &)= 0;
+        virtual void setHeader(const std::string &key, const std::string &value)= 0;
         /*!
         *  \brief Remove a key and value from the map
         *
@@ -86,7 +87,7 @@ namespace apouche {
         *  \return true if the key is in the header,
         * false if the key is not in the header
         */
-        virtual bool containsHeader(const std::string &)= 0;
+        virtual bool containsHeader(const std::string &) const = 0;
     };
 }
 

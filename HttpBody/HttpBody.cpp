@@ -8,7 +8,7 @@ apouche::HttpBody::~HttpBody() {
 
 }
 
-const std::string &apouche::HttpBody::getBody() {
+const std::string &apouche::HttpBody::getBody() const {
     return _body;
 }
 

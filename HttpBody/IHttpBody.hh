@@ -38,7 +38,7 @@ namespace apouche {
             *
             *  \return std::string data of the HttpBody,
             */
-            virtual const std::string &getBody()= 0;
+            virtual const std::string &getBody() const = 0;
             /*!
             *  \brief set data of HttpBody
             *

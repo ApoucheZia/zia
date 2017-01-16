@@ -36,7 +36,7 @@ namespace apouche {
             *  \param void
             *  \return std::map<std::string, std::string>, all the server config
             */
-		virtual const	std::map<std::string, std::string> &getAllConf()= 0;
+		virtual const	std::map<std::string, std::string> &getAllConf() const = 0;
 		/*!
             *  \brief Set all configuration
             *
@@ -45,7 +45,7 @@ namespace apouche {
             *  \param map Content of the entire configuration
             *  \return void
             */
-		virtual void	setAllConf(const std::map<std::string, std::string> &)= 0;
+		virtual void	setAllConf(const std::map<std::string, std::string> &) = 0;
 		/*!
             *  \brief Get value of a specific key
             *
@@ -54,7 +54,7 @@ namespace apouche {
             *  \param key : the key of the configuration
             *  \return std::string, value of the key
             */
-		virtual const	std::string &getConf(const std::string &)= 0;
+		virtual const	std::string &getConf(const std::string &key) const = 0;
 		/*!
            *  \brief set value of a specific key
            *
@@ -82,7 +82,7 @@ namespace apouche {
             *  \return true if the key is in the header,
             * false if the key is not in the header
             */
-		virtual const	bool containsConf(const std::string &)= 0;
+		virtual const	bool containsConf(const std::string &) const = 0;
 		/*!
             *  \brief Update the configuration in the file
             *

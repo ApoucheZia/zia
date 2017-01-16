@@ -109,7 +109,7 @@ namespace apouche {
         *  \return true if the key is in the header,
         * false if the key is not in the header
         */
-        const bool containsEvent(const std::string &name){
+        bool containsEvent(const std::string &name) const {
             for (typename std::vector<Event<T, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
                 if ((*it).getName() == name)
                     return true;
@@ -124,7 +124,7 @@ namespace apouche {
         *  \return true if the key is in the header,
         * false if the key is not in the header
         */
-        const bool containsEvent(const Event<T, Args...> &e){
+        bool containsEvent(const Event<T, Args...> &e) const {
             for (typename std::vector<Event<T, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
                 if ((*it).getName() == e.getName())
                     return true;
@@ -264,7 +264,7 @@ namespace apouche {
         *  \return true if the key is in the header,
         * false if the key is not in the header
         */
-        const bool containsEvent(const std::string &name){
+        bool containsEvent(const std::string &name) const {
             for (typename std::vector<Event<void, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
                 if ((*it).getName() == name)
                     return true;
@@ -279,7 +279,7 @@ namespace apouche {
         *  \return true if the key is in the header,
         * false if the key is not in the header
         */
-        const bool containsEvent(const Event<void, Args...> &e){
+        bool containsEvent(const Event<void, Args...> &e) const {
             for (typename std::vector<Event<void, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
                 if ((*it).getName() == e.getName())
                     return true;
