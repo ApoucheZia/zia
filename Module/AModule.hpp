@@ -8,7 +8,7 @@
 /*!
  * \file HttpHeader.hh
  * \brief Http Object Header, contains header of a request or response
- * \author Kevin Malot
+ * \author Kevin Mallot
  * \version 0.1
  */
 

@@ -2,43 +2,40 @@
 // Created by Julien Karst on 05/01/2017.
 //
 
-#ifndef ZIA_HTTPRESPONSE_HH
-#define ZIA_HTTPRESPONSE_HH
+#ifndef ZIA_IHTTPRESPONSE_H
+#define ZIA_IHTTPRESPONSE_H
 
 /*!
- * \file HttpResponse.hh
- * \brief Http Object response, contains any type of data
- * \author mart_-
+ * \file IHttpResponse.hh
+ * \brief Interface of Http Object response
+ * \author Julien Karst
  * \version 0.1
  */
 
-#include "IHttpResponse.hh"
+
+#include <string>
+#include "../Enum.hh"
+#include "../HttpHeader/IHttpHeader.hh"
+#include "../HttpBody/IHttpBody.hh"
+#include "../HttpMessage/IHttpMessage.hh"
 
 /*! \namespace apouche
  *
  * namespace that contains all http component
  */
 namespace apouche {
-    /*! \class HttpResponse
-    * \brief class that represent an HttpResponse of a response
+    /*! \interface IHttpResponse
+    * \brief Interface that represent an Http Response
     *
     */
-    class HttpResponse: public IHttpResponse {
-    public:
+    class IHttpResponse: public IHttpMessage {
+        public:
         /*!
-            *  \brief Constructor
-            *
-            *  Constructor of HttpResponse
-            *
-            *  \param header : the header of the http response, the body of the http response, version http
-            */
-        HttpResponse(IHttpHeader *header, IHttpBody *body, const std::string &version);
-        /*!
-            *  \brief Destructor
-            *
-            *  Destructor of HttpResponse
-            */
-        ~HttpResponse();
+        *  \brief Destructor
+        *
+        *  Destructor of HttpResponse
+        */
+        virtual ~IHttpResponse() {};
         /*!
             *  \brief Get status code
             *
@@ -47,7 +44,7 @@ namespace apouche {
             *  \param void
             *  \return apouche::StatusCode, status code
             */
-        const apouche::StatusCode &getStatus();
+        virtual const apouche::StatusCode &getStatus()= 0;
         /*!
             *  \brief Set status code
             *
@@ -56,7 +53,7 @@ namespace apouche {
             *  \param status code : apouche::StatusCode
             *  \return void
             */
-        void setStatus(const apouche::StatusCode &);
+        virtual void setStatus(const apouche::StatusCode &)= 0;
         /*!
             *  \brief Get status code description
             *
@@ -65,7 +62,7 @@ namespace apouche {
             *  \param void
             *  \return std::string, description status code
             */
-        const std::string getStatusDescription();
+        virtual const std::string getStatusDescription()= 0;
         /*!
             *  \brief Get the description of the status code
             *
@@ -74,7 +71,7 @@ namespace apouche {
             *  \param void
             *  \return std::string, the status of response
             */
-        const std::string getResponseLine();
+        virtual const std::string getResponseLine()= 0;
         /*!
         *  \brief Get the IHttpHeader of your response
         *
@@ -82,7 +79,7 @@ namespace apouche {
         *
         *  \return apouche::IHttpHeader : Your header of the response
         */
-        IHttpHeader *getHeaders();
+        virtual IHttpHeader *getHeaders()= 0;
         /*!
         *  \brief Set the IHttpHeader of your response
         *
@@ -91,7 +88,7 @@ namespace apouche {
         *  \param header : set the IHttpHeader of your response
         *  \return void
         */
-        void setHeaders(IHttpHeader *header);
+        virtual void setHeaders(IHttpHeader *header)= 0;
         /*!
         *  \brief Get the IHttpBody of your response, you can give you own implementation or use our implementation.
         *
@@ -99,7 +96,7 @@ namespace apouche {
         *
         *  \return apouche::IHttpBody: Your body of the response or response
         */
-        IHttpBody *getBody();
+        virtual IHttpBody *getBody()= 0;
         /*!
         *  \brief Set the IHttpBody of your response
         *
@@ -108,7 +105,7 @@ namespace apouche {
         *  \param body : set the IHttpBody of your response
         *  \return void
         */
-        void setBody(IHttpBody *body);
+        virtual void setBody(IHttpBody *body)= 0;
         /*!
         *  \brief Get the http version of your response.
         *
@@ -116,7 +113,7 @@ namespace apouche {
         *
         *  \return std::string: The http version used for your response
         */
-        const std::string &getVersion();
+        virtual const std::string &getVersion()= 0;
         /*!
         *  \brief Set the http version of your response.
         *
@@ -124,14 +121,8 @@ namespace apouche {
         *
         *  \param version, The http version for your response
         */
-        void setVersion(const std::string &version);
-    private:
-        IHttpHeader *_header; /*!< apouche::IHttpHeader. Http header of your Response */
-        IHttpBody *_body; /*!< apouche::IHttpBody. Http body of your Response */
-        std::string _version; /*!< std::string. Http version of your Response */
-        apouche::StatusCode _status;  /*!< apouche::StatusCode. status code */
-        std::map<apouche::StatusCode, std::string> _message; /*!< std::map<apouche::StatusCode>. description of status code */
+        virtual void setVersion(const std::string &version)= 0;
     };
 }
 
-#endif //ZIA_HTTPRESPONSE_HH
+#endif //ZIA_IHTTPRESPONSE_H

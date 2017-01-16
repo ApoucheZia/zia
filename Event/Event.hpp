@@ -38,7 +38,7 @@ namespace apouche {
         /*!
          *  \brief Destructor
          *
-         *  Destructor of Event
+         *  Destructor of EventList
          */
         ~Event() {
 

@@ -20,6 +20,31 @@ const std::string apouche::HttpResponse::getResponseLine() {
     return _status + " " + _message[_status];
 }
 
+apouche::IHttpHeader *apouche::HttpResponse::getHeaders() {
+    return _header;
+}
+
+void apouche::HttpResponse::setHeaders(IHttpHeader *header) {
+    _header = header;
+}
+
+apouche::IHttpBody *apouche::HttpResponse::getBody() {
+    return _body;
+}
+
+void apouche::HttpResponse::setBody(IHttpBody *body) {
+    _body = body;
+}
+
+const std::string &apouche::HttpResponse::getVersion() {
+    return _version;
+}
+
+void apouche::HttpResponse::setVersion(const std::string &version) {
+    _version = version;
+}
+
+
 apouche::HttpResponse::HttpResponse(apouche::IHttpHeader *header, apouche::IHttpBody *body, const std::string &version) {
     setHeaders(header);
     setBody(body);

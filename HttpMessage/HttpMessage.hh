@@ -27,7 +27,7 @@ namespace apouche {
     *
     */
     class HttpMessage: public IHttpMessage {
-    protected:
+    private:
         IHttpHeader *_header;
         IHttpBody *_body;
         std::string _version;

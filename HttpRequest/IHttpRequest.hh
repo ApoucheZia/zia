@@ -2,53 +2,40 @@
 // Created by mart_- on 05/01/17.
 //
 
-#ifndef ZIA_HTTPREQUEST_HH
-#define ZIA_HTTPREQUEST_HH
+#ifndef ZIA_IHTTPREQUEST_HH
+#define ZIA_IHTTPREQUEST_HH
 
 /*!
- * \file HttpRequest.hh
- * \brief Http Object Request, representation of a request
+ * \file IHttpRequest.hh
+ * \brief Interface that represent an Http Object Request
  * \author Julien Karst
  * \version 0.1
  */
 
-#include "IHttpRequest.hh"
+#include <string>
+#include <map>
+#include "../Enum.hh"
+#include "../HttpHeader/IHttpHeader.hh"
+#include "../HttpBody/IHttpBody.hh"
+#include "../HttpMessage/IHttpMessage.hh"
 
 /*! \namespace apouche
  *
  * namespace that contains all http component
  */
 namespace apouche {
-    /*! \class HttpRequest
-    * \brief class that represent an HttpRequest
+    /*! \interface IHttpRequest
+    * \brief Interface that represent an Http Request
     *
     */
-    class HttpRequest: public IHttpRequest {
-    private:
-        IHttpHeader *_header; /*!< apouche::IHttpHeader. Http header of your Request */
-        IHttpBody *_body; /*!< apouche::IHttpBody. Http body of your Request */
-        std::string _version; /*!< std::string. Http version of your Request */
-        apouche::Method _method; /*!< apouche::Method. Type of method, may be post, get, etc */
-        std::string _URI; /*!< std::string. complete uri */
-        std::map <std::string,  std::string> _uriParameters; /*!< std::map <std::string,  std::string>. get parameters in the uri */
-        static const std::map <apouche::Method,  std::string> _mapMethodFromEnum; /*!< std::map <apouche::Method,  std::string>. get std::string from apouche::Method */
-        static const std::map <std::string, apouche::Method> _mapMethodFromName; /*!< std::map <std::string, apouche::Method>. get apouche::Method from std::string */
+    class IHttpRequest: public IHttpMessage {
     public:
-        /*!
-        *  \brief Construct an HttpRequest
-        *
-        *  Create an HttpRequest
-        *
-        *  \param message : the message recieved from the server, body : an implementation of IHttpBody, header : an implementation of IHttpHeader
-        */
-
-        HttpRequest(const std::string &message, apouche::IHttpBody *, apouche::IHttpHeader *);
         /*!
         *  \brief Destructor
         *
         *  Destructor of HttpRequest
         */
-        ~HttpRequest();
+        virtual ~IHttpRequest() {};
         /*!
         *  \brief Get the method of the header
         *
@@ -56,7 +43,7 @@ namespace apouche {
         *
         *  \return apouche::Method : The type of the request, maybe post, get, etc...
         */
-        const apouche::Method &getMethod();
+        virtual const apouche::Method &getMethod()= 0;
         /*!
         *  \brief Set the method of the header
         *
@@ -65,7 +52,7 @@ namespace apouche {
         *  \param method : set the type of the request, maybe post, get, etc...
         *  \return void
         */
-        void setMethod(const apouche::Method &);
+        virtual void setMethod(const apouche::Method &)= 0;
         /*!
         *  \brief Get the uri
         *
@@ -73,7 +60,7 @@ namespace apouche {
         *
         *  \return std::string : complete uri of the Header
         */
-        const std::string &getURI();
+        virtual const std::string &getURI()= 0;
         /*!
         *  \brief Set the uri of the header
         *
@@ -81,7 +68,7 @@ namespace apouche {
         *
         *  \param uri : set the uri of the request
         */
-        void setURI(const std::string &);
+        virtual void setURI(const std::string &)= 0;
         /*!
         *  \brief Check if a get parameter is in the uri
         *
@@ -90,7 +77,7 @@ namespace apouche {
         *  \param key : a get parameter key in the uri
         *  \return bool : true if the key have a value
         */
-        const bool containsUriParameters(const std::string &);
+        virtual const bool containsUriParameters(const std::string &)= 0;
         /*!
         *  \brief Get all get parameters in the uri
         *
@@ -98,7 +85,7 @@ namespace apouche {
         *
         *  \return std::map<std::string, std::string> : all get parameters in the uri
         */
-        std::map<std::string, std::string> getUriParameters();
+        virtual std::map<std::string, std::string> getUriParameters()= 0;
         /*!
         *  \brief Set all get parameters in the uri
         *
@@ -106,7 +93,7 @@ namespace apouche {
         *
         *  \param map : all get parameters in the uri
         */
-        void setUriParameters(const std::map<std::string, std::string> &);
+        virtual void setUriParameters(const std::map<std::string, std::string> &)= 0;
         /*!
         *  \brief Check if a get parameter is in the uri
         *
@@ -115,7 +102,7 @@ namespace apouche {
         *  \param key : a get parameter key in the uri
         *  \return std::string : value of the key
         */
-        const std::string &getUriParameter(const std::string &);
+        virtual const std::string &getUriParameter(const std::string &)= 0;
         /*!
         *  \brief Set a get parameters in the uri
         *
@@ -123,7 +110,7 @@ namespace apouche {
         *
         *  \param key : a get parameter key in the uri, value : a get parameters value in the uri
         */
-        void setUriParameter(const std::string &, const std::string &);
+        virtual void setUriParameter(const std::string &, const std::string &)= 0;
         /*!
         *  \brief Get the request line of your request
         *
@@ -131,7 +118,7 @@ namespace apouche {
         *
         *  \return std::string : the request line
         */
-        const std::string getRequestLine();
+        virtual const std::string getRequestLine()= 0;
         /*!
         *  \brief Get the IHttpHeader of your request
         *
@@ -139,7 +126,7 @@ namespace apouche {
         *
         *  \return apouche::IHttpHeader : Your header of the request
         */
-        IHttpHeader *getHeaders();
+        virtual IHttpHeader *getHeaders()= 0;
         /*!
         *  \brief Set the IHttpHeader of your request
         *
@@ -148,7 +135,7 @@ namespace apouche {
         *  \param header : set the IHttpHeader of your request
         *  \return void
         */
-        void setHeaders(IHttpHeader *header);
+        virtual void setHeaders(IHttpHeader *header)= 0;
         /*!
         *  \brief Get the IHttpBody of your request, you can give you own implementation or use our implementation.
         *
@@ -156,7 +143,7 @@ namespace apouche {
         *
         *  \return apouche::IHttpBody: Your body of the request or response
         */
-        IHttpBody *getBody();
+        virtual IHttpBody *getBody()= 0;
         /*!
         *  \brief Set the IHttpBody of your request
         *
@@ -165,7 +152,7 @@ namespace apouche {
         *  \param body : set the IHttpBody of your request
         *  \return void
         */
-        void setBody(IHttpBody *body);
+        virtual void setBody(IHttpBody *body)= 0;
         /*!
         *  \brief Get the http version of your request.
         *
@@ -173,7 +160,7 @@ namespace apouche {
         *
         *  \return std::string: The http version used for your request
         */
-        const std::string &getVersion();
+        virtual const std::string &getVersion()= 0;
         /*!
         *  \brief Set the http version of your request.
         *
@@ -181,8 +168,8 @@ namespace apouche {
         *
         *  \param version, The http version for your request
         */
-        void setVersion(const std::string &version);
+        virtual void setVersion(const std::string &version)= 0;
     };
 }
 
-#endif //ZIA_HTTPREQUEST_HH
+#endif //ZIA_IHTTPREQUEST_HH

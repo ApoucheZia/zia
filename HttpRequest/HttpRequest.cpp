@@ -50,6 +50,30 @@ void apouche::HttpRequest::setUriParameters(const std::map<std::string, std::str
     _uriParameters = uriParameters;
 }
 
+apouche::IHttpHeader *apouche::HttpRequest::getHeaders() {
+    return _header;
+}
+
+void apouche::HttpRequest::setHeaders(IHttpHeader *header) {
+    _header = header;
+}
+
+apouche::IHttpBody *apouche::HttpRequest::getBody() {
+    return _body;
+}
+
+void apouche::HttpRequest::setBody(IHttpBody *body) {
+    _body = body;
+}
+
+const std::string &apouche::HttpRequest::getVersion() {
+    return _version;
+}
+
+void apouche::HttpRequest::setVersion(const std::string &version) {
+    _version = version;
+}
+
 apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody *body, apouche::IHttpHeader *header) {
     setHeaders(header);
     setBody(body);

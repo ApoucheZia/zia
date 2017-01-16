@@ -15,9 +15,9 @@
 #include <map>
 #include <functional>
 #include "../EventList/EventList.hpp"
+#include "../HttpResponse/IHttpResponse.hh"
 #include "../HttpConf/IHttpConf.hpp"
-#include "../HttpResponse/HttpResponse.hh"
-#include "../HttpRequest/HttpRequest.hh"
+#include "../HttpRequest/IHttpRequest.hh"
 
 /*! \namespace apouche
  *
@@ -31,12 +31,12 @@ namespace apouche {
     class EventHandler {
     public:
         EventList<void, int> _afterConnect;
-        EventList<void, HttpRequest *> _requestReceived;
-        EventList<void, HttpRequest *> _beforeParsingRequest;
-        EventList<void, HttpRequest *> _afterParsingRequest;
-        EventList<void, HttpRequest *> _beforeCreateResponse;
-        EventList<void, HttpRequest *, HttpResponse *> _afterCreateResponse;
-        EventList<bool, HttpResponse *, IHttpConf *> _beforeSendResponse;
+        EventList<void, IHttpRequest *> _requestReceived;
+        EventList<void, IHttpRequest *> _beforeParsingRequest;
+        EventList<void, IHttpRequest *> _afterParsingRequest;
+        EventList<void, IHttpRequest *> _beforeCreateResponse;
+        EventList<void, IHttpRequest *, IHttpResponse *> _afterCreateResponse;
+        EventList<bool, IHttpResponse *, IHttpConf *> _beforeSendResponse;
         EventList<void, int> _afterSendResponse;
       EventList<void> _voidEventList;
     };
