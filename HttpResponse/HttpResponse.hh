@@ -140,7 +140,7 @@ namespace apouche {
         IHttpBody *_body; /*!< apouche::IHttpBody. Http body of your Response */
         std::string _version; /*!< std::string. Http version of your Response */
         apouche::StatusCode _status;  /*!< apouche::StatusCode. status code */
-        std::map<apouche::StatusCode, std::string> _message; /*!< std::map<apouche::StatusCode>. description of status code */
+        static const std::map<apouche::StatusCode, std::string> _message; /*!< std::map<apouche::StatusCode>. description of status code */
     };
 }
 
