@@ -74,9 +74,10 @@ namespace apouche {
                 if ((*it).getPriority() > e.getPriority())
                     e = *it;
             }
-            for (typename std::vector<Event<T, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
-                if ((*it).getName() == e.getName())
-                    return *it;
+            typename std::vector<Event<void, Args...>>::iterator it = _event.begin();
+            while ((*it).getName() != e.getName())
+                ++it;
+            return *it;
         }
         /*!
         *  \brief Put an Event
@@ -229,9 +230,10 @@ namespace apouche {
                 if ((*it).getPriority() > e.getPriority())
                     e = *it;
             }
-            for (typename std::vector<Event<void, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
-                if ((*it).getName() == e.getName())
-                    return *it;
+            typename std::vector<Event<void, Args...>>::iterator it = _event.begin();
+            while ((*it).getName() != e.getName())
+                ++it;
+            return *it;
         }
         /*!
         *  \brief Put an Event
