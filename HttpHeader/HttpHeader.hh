@@ -87,7 +87,7 @@ namespace apouche {
             */
             bool containsHeader(const std::string &) const override;
 
-        private:
+        protected:
             std::map<std::string, std::string> _header;
     };
 }

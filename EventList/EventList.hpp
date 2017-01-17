@@ -31,7 +31,7 @@ namespace apouche {
     */
     template <typename T, typename... Args>
     class EventList {
-    private:
+    protected:
         std::vector<Event<T, Args...>> _event;
     public:
         /*!
@@ -187,7 +187,7 @@ namespace apouche {
 
     template <typename... Args>
     class EventList<void, Args...> {
-    private:
+    protected:
         std::vector<Event<void, Args...>> _event;
     public:
         /*!

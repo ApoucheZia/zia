@@ -47,7 +47,7 @@ namespace apouche {
             *  \return void,
             */
             void setBody(const std::string &) override;
-        private:
+        protected:
             std::string _body;  /*!< any type of data in the http body*/
     };
 }

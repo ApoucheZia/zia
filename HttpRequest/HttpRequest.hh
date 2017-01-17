@@ -24,7 +24,7 @@ namespace apouche {
     *
     */
     class HttpRequest: public IHttpRequest {
-    private:
+    protected:
         IHttpHeader *_header; /*!< apouche::IHttpHeader. Http header of your Request */
         IHttpBody *_body; /*!< apouche::IHttpBody. Http body of your Request */
         std::string _version; /*!< std::string. Http version of your Request */
