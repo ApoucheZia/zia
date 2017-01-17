@@ -110,7 +110,7 @@ namespace apouche {
             _function = f;
         }
 
-    private:
+    protected:
         std::string _name;
         Weight _priority;
         std::function<T(Args...)> _function;

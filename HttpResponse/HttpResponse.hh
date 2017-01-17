@@ -135,7 +135,7 @@ namespace apouche {
         *  \param version, The http version for your response
         */
         void setVersion(const std::string &version) override;
-    private:
+    protected:
         IHttpHeader *_header; /*!< apouche::IHttpHeader. Http header of your Response */
         IHttpBody *_body; /*!< apouche::IHttpBody. Http body of your Response */
         std::string _version; /*!< std::string. Http version of your Response */

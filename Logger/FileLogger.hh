@@ -25,7 +25,7 @@ namespace apouche {
     *
     */
     class FileLogger: public Logger {
-    private:
+    protected:
         std::string _filename;
         std::fstream _file;
     public:
