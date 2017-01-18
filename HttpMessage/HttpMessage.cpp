@@ -4,10 +4,17 @@
 
 #include "HttpMessage.hh"
 
-apouche::HttpMessage::HttpMessage(IHttpHeader *iHttpHeader, IHttpBody *iHttpBody, const std::string &version) {
-    _header = iHttpHeader;
-    _body = iHttpBody;
-    _version = version;
+apouche::HttpMessage::HttpMessage(IHttpHeader *iHttpHeader, IHttpBody *iHttpBody, const std::string &version)
+  : _header (iHttpHeader)
+  , _body (iHttpBody)
+  , _version (version)
+{
+}
+
+apouche::HttpMessage::~HttpMessage()
+{
+  delete _header;
+  delete _body;
 }
 
 apouche::IHttpHeader *apouche::HttpMessage::getHeaders() {
@@ -19,6 +26,7 @@ const apouche::IHttpHeader *apouche::HttpMessage::getHeaders() const {
 }
 
 void apouche::HttpMessage::setHeaders(IHttpHeader *header) {
+    delete _header;
     _header = header;
 }
 
@@ -31,6 +39,7 @@ const apouche::IHttpBody *apouche::HttpMessage::getBody() const {
 }
 
 void apouche::HttpMessage::setBody(IHttpBody *body) {
+    delete _body;
     _body = body;
 }
 

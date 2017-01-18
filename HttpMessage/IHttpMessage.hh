@@ -46,7 +46,7 @@ namespace apouche {
          */
         virtual const IHttpHeader *getHeaders() const = 0;
         /*!
-        *  \brief Set the IHttpHeader of your request or response
+        *  \brief Delete the old header and set the IHttpHeader of your message
         *
         *  Set the IHttpHeader of your request or response
         *
@@ -68,7 +68,7 @@ namespace apouche {
          */
         virtual const IHttpBody *getBody() const = 0;
         /*!
-        *  \brief Set the IHttpBody of your request or response
+        *  \brief Delete the old body and set the IHttpBody of your message
         *
         *  Set the IHttpBody of your request or response
         *

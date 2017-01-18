@@ -5,7 +5,8 @@
 #include "HttpResponse.hh"
 
 apouche::HttpResponse::~HttpResponse() {
-
+  delete _header;
+  delete _body;
 }
 
 apouche::StatusCode apouche::HttpResponse::getStatus() const {
@@ -29,6 +30,7 @@ const apouche::IHttpHeader *apouche::HttpResponse::getHeaders() const {
 }
 
 void apouche::HttpResponse::setHeaders(IHttpHeader *header) {
+    delete _header;
     _header = header;
 }
 
@@ -41,6 +43,7 @@ const apouche::IHttpBody *apouche::HttpResponse::getBody() const {
 }
 
 void apouche::HttpResponse::setBody(IHttpBody *body) {
+    delete _body;
     _body = body;
 }
 
@@ -53,9 +56,10 @@ void apouche::HttpResponse::setVersion(const std::string &version) {
 }
 
 
-apouche::HttpResponse::HttpResponse(apouche::IHttpHeader *header, apouche::IHttpBody *body, const std::string &version) {
-    setHeaders(header);
-    setBody(body);
+apouche::HttpResponse::HttpResponse(apouche::IHttpHeader *header, apouche::IHttpBody *body, const std::string &version)
+  : _header (header)
+  , _body (body)
+{
 }
 
 const std::string &apouche::HttpResponse::getStatusDescription() const {

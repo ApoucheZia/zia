@@ -89,7 +89,7 @@ namespace apouche {
          */
         const IHttpHeader *getHeaders() const override;
         /*!
-        *  \brief Set the IHttpHeader of your response
+        *  \brief Delete the old header and set the IHttpHeader of your response
         *
         *  Set the IHttpHeader of your response
         *
@@ -111,7 +111,7 @@ namespace apouche {
          */
         const IHttpBody *getBody() const override;
         /*!
-        *  \brief Set the IHttpBody of your response
+        *  \brief Delete the old body and set the IHttpBody of your response
         *
         *  Set the IHttpBody of your response
         *
