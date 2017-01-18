@@ -177,7 +177,7 @@ namespace apouche {
         *  \return void
         */
         void removeEvent (Event<void, Args...> &e) {
-            _event.erase(std::remove_if(_event.begin(), _event.end(), [const &e](Event<T, Args...> const &it) { return it.getName() == e.getName(); }), _event.end());
+            removeEvent(e.getName());
         }
         /*!
         *  \brief Call the next Event
