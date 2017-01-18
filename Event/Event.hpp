@@ -43,14 +43,14 @@ namespace apouche {
         ~Event() {
 
         }
-        /*!
-         *  \brief Get the Name
-         *
-         *  Get the Event name
-         *
-         *  \param name : void
-         *  \return std::string
-         */
+            /*!
+             *  \brief Get the Name
+             *
+             *  Get the Event name
+             *
+             *  \param name : void
+             *  \return std::string
+             */
         const std::string &getName() const{
             return _name;
         }
