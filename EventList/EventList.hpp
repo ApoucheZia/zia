@@ -9,6 +9,8 @@
  * \file EventList.hh
  * \brief Event List
  * \author Kevin Malot
+ * \author Alexandre NICOLAIE
+ * \author Clement Francois
  * \version 0.1
  */
 
@@ -18,16 +20,6 @@
 #include <iostream>
 #include <typeinfo>
 #include "../Event/Event.hpp"
-
-/*
- *  Sorting the set
- */
-template <typename T, typename... Args>
-struct compare {
-    bool operator()(const apouche::Event<T, Args...> &a, const apouche::Event<T, Args...> &b) {
-        return a.getPriority() < b.getPriority();
-    }
-};
 
 /*! \namespace apouche
  *
@@ -56,10 +48,23 @@ namespace apouche {
     */
     template <typename T, typename... Args>
     class EventList {
+    private:
+        /*
+        *  Sorting the set
+        */
+        struct EventCompare {
+            bool operator()(const apouche::Event<T, Args...> &a, const apouche::Event<T, Args...> &b) {
+                return a.getPriority() < b.getPriority();
+            }
+        };
+
     protected:
-        std::multiset<Event<T, Args...>, compare<T, Args...>> _event;
+        std::multiset<Event<T, Args...>, EventCompare> _event;
+
     public:
         typedef typename Helper<T>::callback callback;
+        typedef typename std::multiset<Event<T, Args...>>::iterator EventIterator;
+
         /*!
         *  \brief Constructor
         *
@@ -74,18 +79,15 @@ namespace apouche {
         */
         ~EventList() {};
         /*!
-            *  \brief Get the Event
-            *
-            *  Get the Event from name
-            *
-            *  \param name : std::string
-            *  \return Event<T, Args...>, Event
-            */
-        const Event<T, Args...> &getEvent(const std::string &name){
-            for (typename std::multiset<Event<T, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
-                if ((*it).getName() == name)
-                    return (*it);
-            return NULL;
+        *  \brief Get the Event
+        *
+        *  Get the Event from name
+        *
+        *  \param name : std::string
+        *  \return Event<T, Args...>, Event
+        */
+        EventIterator getEvent(const std::string &name){
+            return std::find_if(_event.begin(), _event.end(), [&name](Event<T, Args...> const &it) { return it.getName() == name; });
         }
         /*!
         *  \brief Get the next event
@@ -95,19 +97,18 @@ namespace apouche {
         *  \param void
         *  \return Event<T, Args...>, Event
         */
-        typename std::multiset<Event<T, Args...>>::iterator  getNextEvent() const{
+        EventIterator getNextEvent() const{
             return _event.begin();
         }
-
-            /*!
-            *  \brief Get the end of the eventList
-            *
-            *  Get the end of the EventList
-            *
-            *  \param void
-            *  \return Iterator the end of the set
-            */
-        const typename std::multiset<Event<T, Args...>>::iterator &getEnd() const{
+        /*!
+        *  \brief Get the end of the eventList
+        *
+        *  Get the end of the EventList
+        *
+        *  \param void
+        *  \return Iterator the end of the set
+        */
+        EventIterator getEnd() const{
             return _event.end();
         }
         /*!
@@ -142,10 +143,7 @@ namespace apouche {
         * false if the key is not in the header
         */
         bool containsEvent(const std::string &name) const {
-           for (typename std::multiset<Event<T, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
-                if ((*it).getName() == name)
-                    return true;
-            return false;
+            return std::find_if(_event.begin(), _event.end(), [&name](Event<T, Args...> const &it) { return it.getName() == name; }) != _event.end();
         }
         /*!
         *  \brief Check if a key is in the Header
@@ -157,10 +155,7 @@ namespace apouche {
         * false if the key is not in the header
         */
         bool containsEvent(const Event<T, Args...> &e) const {
-            for (typename std::multiset<Event<T, Args...>>::iterator it = _event.begin() ; it != _event.end(); ++it)
-                if ((*it).getName() == e.getName())
-                    return true;
-            return false;
+            return std::find(_event.begin(), _event.end(), e) != _event.end();
         }
         /*!
         *  \brief Remove the Event
@@ -170,13 +165,8 @@ namespace apouche {
         *  \param key : the name of Event
         *  \return void
         */
-        void removeEvent(const std::string &name){
-            for (typename std::multiset<Event<T, Args...>>::iterator it = _event.begin() ; it != _event.end();) {
-                if ((*it).getName() == name)
-                    it = _event.erase(it);
-                else
-                    ++it;
-            }
+        void removeEvent(const std::string &name) {
+            _event.erase(std::remove_if(_event.begin(), _event.end(), [&name](Event<T, Args...> const &it) { return it.getName() == name; }), _event.end());
         }
         /*!
         *  \brief Remove the Event
@@ -187,15 +177,7 @@ namespace apouche {
         *  \return void
         */
         void removeEvent (Event<void, Args...> &e) {
-            for (typename std::multiset<Event<void, Args...>>::iterator it = _event.begin() ; it != _event.end();) {
-                if ((*it).getName() == e.getName())
-                {
-                    _event.erase(it);
-                    return;
-                }
-                else
-                    ++it;
-            }
+            _event.erase(std::remove_if(_event.begin(), _event.end(), [const &e](Event<T, Args...> const &it) { return it.getName() == e.getName(); }), _event.end());
         }
         /*!
         *  \brief Call the next Event
@@ -206,7 +188,10 @@ namespace apouche {
         *  \return The function
         */
         T callNextEvent(Args... args) {
-            return (*getNextEvent()).getFunction()(args...);
+            auto &&it = getNextEvent();
+            if (it == _event.end())
+                throw; //Todo: add exception ici;
+            return it->getFunction()(args...);
         }
         /*!
         *  \brief Call all the Events
@@ -217,10 +202,10 @@ namespace apouche {
         *  \return void
         */
         void callAllEvent(const callback &fct, Args... args){
-            while (_event.size()) {
-                fct(callNextEvent(args...));
-                removeEvent((*getNextEvent()).getName());
+            for (auto &&it : _event) {
+                fct(it.getFunction()(args...));
             }
+            _event.clear();
         }
         /*!
         *  \brief Call all the Events
@@ -231,11 +216,10 @@ namespace apouche {
         *  \return void
         */
         void callAllEvent(Args... args){
-            while (_event.size()) {
-                callNextEvent(args...);
-                std::cout << "NEXT EVENT : " << (*getNextEvent()).getName() << std::endl;
-                removeEvent((*getNextEvent()).getName());
+            for (auto &&it : _event) {
+                it.getFunction()(args...);
             }
+            _event.clear();
         }
     };
 }
