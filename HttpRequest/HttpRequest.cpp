@@ -7,7 +7,8 @@
 #include <iostream>
 
 apouche::HttpRequest::~HttpRequest() {
-
+  delete _header;
+  delete _body;
 }
 
 apouche::Method apouche::HttpRequest::getMethod() const {
@@ -59,6 +60,7 @@ const apouche::IHttpHeader *apouche::HttpRequest::getHeaders() const {
 }
 
 void apouche::HttpRequest::setHeaders(IHttpHeader *header) {
+    delete _header;
     _header = header;
 }
 
@@ -71,6 +73,7 @@ const apouche::IHttpBody *apouche::HttpRequest::getBody() const {
 }
 
 void apouche::HttpRequest::setBody(IHttpBody *body) {
+    delete _body;
     _body = body;
 }
 
@@ -82,10 +85,10 @@ void apouche::HttpRequest::setVersion(const std::string &version) {
     _version = version;
 }
 
-apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody *body, apouche::IHttpHeader *header) {
-    setHeaders(header);
-    setBody(body);
-
+apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody *body, apouche::IHttpHeader *header)
+  : _header (header)
+  , _body (body)
+{
     std::istringstream ss(message);
     std::string token;
 

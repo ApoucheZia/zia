@@ -49,7 +49,7 @@ namespace apouche {
         *
         *  Destructor of HttpMessage
         */
-        ~HttpMessage(){};
+        ~HttpMessage();
         /*!
         *  \brief Get the IHttpHeader of your message, you can give you own implementation or use our implementation.
         *
@@ -64,7 +64,7 @@ namespace apouche {
          */
         const IHttpHeader *getHeaders() const override;
         /*!
-        *  \brief Set the IHttpHeader of your request or response
+        *  \brief Delete the old header and set the IHttpHeader of your message
         *
         *  Set the IHttpHeader of your request or response
         *
@@ -86,7 +86,7 @@ namespace apouche {
          */
         const IHttpBody *getBody() const override;
         /*!
-        *  \brief Set the IHttpBody of your request or response
+        *  \brief Delete the old body and set the IHttpBody of your message
         *
         *  Set the IHttpBody of your request or response
         *
