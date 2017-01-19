@@ -122,6 +122,7 @@ namespace apouche {
         *  Set a get parameters in the uri
         *
         *  \param key : a get parameter key in the uri, value : a get parameters value in the uri
+        *  \throw std::out_of_range : if the key doesn\'t exist
         */
         void setUriParameter(const std::string &, const std::string &) override;
         /*!

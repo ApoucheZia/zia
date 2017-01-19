@@ -108,7 +108,8 @@ namespace apouche {
         *  Set a get parameters in the uri
         *
         *  \param key : a GET parameter key in the uri
-         * \param value : a GET parameters value in the uri
+        *  \param value : a GET parameters value in the uri
+        *  \throw std::out_of_range : if the key doesn\'t exist
         */
         virtual void setUriParameter(const std::string &key, const std::string &value)= 0;
         /*!

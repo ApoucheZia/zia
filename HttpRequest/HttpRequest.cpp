@@ -36,8 +36,6 @@ const std::map<std::string, std::string> &apouche::HttpRequest::getUriParameters
 }
 
 const std::string &apouche::HttpRequest::getUriParameter(const std::string &key) const {
-    if ((_uriParameters.find(key) == _uriParameters.end()))
-        throw std::out_of_range("at");
     return _uriParameters.at(key);
 }
 
