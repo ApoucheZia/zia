@@ -30,6 +30,8 @@ set(SOURCE_FILES
     Logger/Logger.cpp
     Logger/Logger.hh
     Module/AModule.hpp
+    Network/INetworkStatus.hpp
+    Network/IZiaConnection.hpp
     SampleModule/RequestInfoPrintingModule.hpp
     SampleModule/ResponseRewritingModule.hpp
     Enum.hh
