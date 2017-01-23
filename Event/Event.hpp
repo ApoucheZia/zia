@@ -5,7 +5,7 @@
 #ifndef ZIA_EVENT_HPP
 #define ZIA_EVENT_HPP
 
-#include "../Enum.hh"
+#include "Enum.hh"
 
 /*!
  * \file Event.hpp
@@ -24,15 +24,16 @@ namespace apouche {
    * \brief class that represent an Event
    *
    */
-    template <typename T, typename... Args>
-    class Event{
+    template <class T = void()>
+    class Event {
     public:
         /*!
          *  \brief Constructor
          *
          *  Constructor of Event
          */
-        Event(const std::string &name, const apouche::Weight &priority, const std::function<T(Args...)> &function) :  _name(name), _priority(priority), _function(function){
+        Event(const std::string &name, const apouche::Weight &priority, const std::function<T> &function) :
+                _name(name), _priority(priority), _function(function){
 
         }
         /*!
@@ -95,7 +96,7 @@ namespace apouche {
          *  \param name : void
          *  \return std::function<T(Args...)>
          */
-        const std::function<T(Args...)> &getFunction() const{
+        const std::function<T> &getFunction() const{
             return _function;
         }
         /*!
@@ -106,14 +107,14 @@ namespace apouche {
          *  \param name : std::function<T(Args...)>
          *  \return void
          */
-        void setFunction(const std::function<T(Args...)> &f) {
+        void setFunction(const std::function<T> &f) {
             _function = f;
         }
 
     protected:
         std::string _name;
         Weight _priority;
-        std::function<T(Args...)> _function;
+        std::function<T> _function;
     };
 }
 

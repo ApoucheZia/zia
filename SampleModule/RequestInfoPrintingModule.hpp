@@ -22,7 +22,7 @@ namespace apouche {
             _logger.info(_name + " v" + _version + ": Event registering -> Request Informations printing");
 
             auto function = std::bind(&RequestInfoPrintingModule::print_request_info, this, std::placeholders::_1, std::placeholders::_2);
-            Event<void, IHttpRequest *, IHttpConf *> _event("Print Request Informations", Weight::HIGH, function);
+            Event<void(IHttpRequest *, IHttpConf *)> _event("Print Request Informations", Weight::HIGH, function);
 
             _handler->_requestReceived.addEvent(_event);
         };

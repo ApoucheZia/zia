@@ -19,7 +19,7 @@
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
-#include "../Event/Event.hpp"
+#include "Event/Event.hpp"
 
 /*! \namespace apouche
  *
@@ -30,40 +30,40 @@ namespace apouche {
     /*
      *  Making void type compilates
      */
-    template<typename T>
+    template<typename T = void()>
     struct Helper
     {
-        typedef std::function<void(T)> callback;
+        typedef std::function<T> callback;
     };
 
-    template <>
-    struct Helper<void>
-    {
-        typedef std::function<void()> callback;
-    };
+//    template <>
+//    struct Helper<void>
+//    {
+//        typedef std::function<void()> callback;
+//    };
 
     /*! \class EventList
     * \brief class that represent an EventList
     *
     */
-    template <typename T, typename... Args>
+    template <typename T = void()>
     class EventList {
     private:
         /*
         *  Sorting the set
         */
         struct EventCompare {
-            bool operator()(const apouche::Event<T, Args...> &a, const apouche::Event<T, Args...> &b) {
+            bool operator()(const apouche::Event<T> &a, const apouche::Event<T> &b) {
                 return a.getPriority() < b.getPriority();
             }
         };
 
     protected:
-        std::multiset<Event<T, Args...>, EventCompare> _event;
+        std::multiset<Event<T>, EventCompare> _event;
 
     public:
         typedef typename Helper<T>::callback callback;
-        typedef typename std::multiset<Event<T, Args...>>::iterator EventIterator;
+        typedef typename std::multiset<Event<T>>::iterator EventIterator;
 
         /*!
         *  \brief Constructor
@@ -87,7 +87,7 @@ namespace apouche {
         *  \return Event<T, Args...>, Event
         */
         EventIterator getEvent(const std::string &name){
-            return std::find_if(_event.begin(), _event.end(), [&name](Event<T, Args...> const &it) { return it.getName() == name; });
+            return std::find_if(_event.begin(), _event.end(), [&name](Event<T> const &it) { return it.getName() == name; });
         }
         /*!
         *  \brief Get the next event
@@ -119,7 +119,7 @@ namespace apouche {
         *  \param event : Event<T, Args...>
         *  \return void
         */
-        void addEvent(const Event<T, Args...> &event){
+        void addEvent(const Event<T> &event){
             _event.insert(event);
         }
         /*!
@@ -130,8 +130,8 @@ namespace apouche {
         *  \param name : std::string, priority : apouche::Weight, function : std::function<T(Args...)>
         *  \return void
         */
-        void addEvent(const std::string &name, const Weight &priority, const std::function<T(Args...)> &fct) {
-            _event.insert(Event<T, Args...>(name, priority, fct));
+        void addEvent(const std::string &name, const Weight &priority, const std::function<T> &fct) {
+            _event.insert(Event<T>(name, priority, fct));
         }
         /*!
         *  \brief Check if a key is in the Header
@@ -143,7 +143,7 @@ namespace apouche {
         * false if the key is not in the header
         */
         bool containsEvent(const std::string &name) const {
-            return std::find_if(_event.begin(), _event.end(), [&name](Event<T, Args...> const &it) { return it.getName() == name; }) != _event.end();
+            return std::find_if(_event.begin(), _event.end(), [&name](Event<T> const &it) { return it.getName() == name; }) != _event.end();
         }
         /*!
         *  \brief Check if a key is in the Header
@@ -154,7 +154,7 @@ namespace apouche {
         *  \return true if the key is in the header,
         * false if the key is not in the header
         */
-        bool containsEvent(const Event<T, Args...> &e) const {
+        bool containsEvent(const Event<T> &e) const {
             return std::find(_event.begin(), _event.end(), e) != _event.end();
         }
         /*!
@@ -166,7 +166,7 @@ namespace apouche {
         *  \return void
         */
         void removeEvent(const std::string &name) {
-            _event.erase(std::remove_if(_event.begin(), _event.end(), [&name](Event<T, Args...> const &it) { return it.getName() == name; }), _event.end());
+            _event.erase(std::remove_if(_event.begin(), _event.end(), [&name](Event<T> const &it) { return it.getName() == name; }), _event.end());
         }
         /*!
         *  \brief Remove the Event
@@ -176,7 +176,7 @@ namespace apouche {
         *  \param key : the Event
         *  \return void
         */
-        void removeEvent (Event<void, Args...> &e) {
+        void removeEvent (Event<> &e) {
             removeEvent(e.getName());
         }
         /*!
@@ -187,7 +187,12 @@ namespace apouche {
         *  \param Args : Parameters of the function called
         *  \return The function
         */
-        T callNextEvent(Args... args) {
+        template<class ...Args>
+        auto callNextEvent(Args&&... args)
+#if __cplusplus <= 201103L
+        ->decltype(getNextEvent()->getFunction()(args...))
+#endif
+        {
             auto &&it = getNextEvent();
             if (it == _event.end())
                 throw; //Todo: add exception ici;
@@ -201,7 +206,8 @@ namespace apouche {
         *  \param Function : Callback function , Parameters of the function called
         *  \return void
         */
-        void callAllEvent(const callback &fct, Args... args){
+        template< class ...Args>
+        void callAllEvent(const callback &fct, Args&&... args){
             for (auto &&it : _event) {
                 fct(it.getFunction()(args...));
             }
@@ -215,7 +221,8 @@ namespace apouche {
         *  \param Parameters of the function called
         *  \return void
         */
-        void callAllEvent(Args... args){
+        template< class ...Args>
+        void callAllEvent(Args&&... args){
             for (auto &&it : _event) {
                 it.getFunction()(args...);
             }
