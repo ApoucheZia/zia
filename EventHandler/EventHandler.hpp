@@ -14,10 +14,13 @@
 
 #include <map>
 #include <functional>
+#include <vector>
 #include "../EventList/EventList.hpp"
 #include "../HttpResponse/IHttpResponse.hh"
 #include "../HttpConf/IHttpConf.hpp"
 #include "../HttpRequest/IHttpRequest.hh"
+#include "../Network/INetworkStatus.hpp"
+#include "../Network/IZiaConnection.hpp"
 
 /*! \namespace apouche
  *
@@ -30,14 +33,15 @@ namespace apouche {
     */
     class EventHandler {
     public:
-        EventList<void, int, IHttpConf *> _afterConnect;
+        EventList<void, IHttpConf *, INetworkStatus *> _onNetworkIO; // will handle network input/output operations
+        EventList<void, IZiaConnection *, IHttpConf *> _afterConnect;
         EventList<void, IHttpRequest *, IHttpConf *> _requestReceived;
         EventList<void, IHttpRequest *, IHttpConf *> _beforeParsingRequest;
         EventList<void, IHttpRequest *, IHttpConf *> _afterParsingRequest;
         EventList<void, IHttpRequest *, IHttpConf *> _beforeCreateResponse;
         EventList<void, IHttpRequest *, IHttpResponse *, IHttpConf *> _afterCreateResponse;
         EventList<bool, IHttpResponse *, IHttpConf *> _beforeSendResponse;
-        EventList<void, int> _afterSendResponse;
+        EventList<void, IZiaConnection *> _afterSendResponse;
       EventList<void> _voidEventList;
     };
 }
