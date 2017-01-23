@@ -6,8 +6,8 @@
 #define ZIA_LOGGER_HH
 
 /*!
- * \file HttpHeader.hh
- * \brief Http Object Header, contains header of a request or response
+ * \file Logger.hh
+ * \brief Simple logger class
  * \author Julien Karst
  * \version 0.1
  */
@@ -39,7 +39,7 @@ namespace apouche {
         *  \param std::string : message
         *  \return void
         */
-        void debug(const std::string &message);
+        virtual void debug(const std::string &message);
         /*!
         *  \brief write the error message
         *
@@ -48,7 +48,7 @@ namespace apouche {
         *  \param std::string : message
         *  \return void
         */
-        void error(const std::string &message);
+        virtual void error(const std::string &message);
         /*!
         *  \brief write the fatal message
         *
@@ -57,7 +57,7 @@ namespace apouche {
         *  \param std::string : message
         *  \return void
         */
-        void fatal(const std::string &message);
+        virtual void fatal(const std::string &message);
         /*!
         *  \brief write the info message
         *
@@ -66,7 +66,7 @@ namespace apouche {
         *  \param std::string : message
         *  \return void
         */
-        void info(const std::string &message);
+        virtual void info(const std::string &message);
         /*!
         *  \brief write the warning message
         *
@@ -75,7 +75,7 @@ namespace apouche {
         *  \param std::string : message
         *  \return void
         */
-        void warning(const std::string &message);
+        virtual void warning(const std::string &message);
         /*!
         *  \brief write the message
         *
