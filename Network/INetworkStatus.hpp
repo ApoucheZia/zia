@@ -9,7 +9,7 @@
 #define ZIA_INETWORKSTATUS_HPP
 
 #include <vector>
-#include "../HttpRequest/IHttpRequest.hh"
+#include "HttpRequest/IHttpRequest.hh"
 #include "IZiaConnection.hpp"
 
 namespace apouche

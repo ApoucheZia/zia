@@ -13,8 +13,8 @@
  */
 
 #include <string>
-#include "../EventHandler/EventHandler.hpp"
-#include "../Logger/Logger.hh"
+#include "EventHandler/EventHandler.hpp"
+#include "Logger/Logger.hh"
 
 /*! \namespace apouche
  *

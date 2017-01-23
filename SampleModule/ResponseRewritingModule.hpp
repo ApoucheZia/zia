@@ -5,7 +5,7 @@
 #ifndef ZIA_RESPONSE_MODULE_HH
 #define ZIA_RESPONSE_MODULE_HH
 
-#include "../Module/AModule.hpp"
+#include "Module/AModule.hpp"
 
 namespace apouche {
 

@@ -2,9 +2,9 @@
 // Created by mart_- on 05/01/17.
 //
 
-#include "HttpRequest.hh"
 #include <sstream>
 #include <iostream>
+#include "HttpRequest.hh"
 
 apouche::HttpRequest::~HttpRequest() {
   delete _header;

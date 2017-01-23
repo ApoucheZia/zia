@@ -5,7 +5,7 @@
 #ifndef ZIA_PRINTINGMODULE_HH
 #define ZIA_PRINTINGMODULE_HH
 
-#include "../Module/AModule.hpp"
+#include "Module/AModule.hpp"
 
 namespace apouche {
 

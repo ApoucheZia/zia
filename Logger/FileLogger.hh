@@ -12,8 +12,8 @@
  * \version 0.1
  */
 
-#include "Logger.hh"
 #include <fstream>
+#include "Logger.hh"
 
 /*! \namespace apouche
  *
