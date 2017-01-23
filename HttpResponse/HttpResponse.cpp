@@ -59,6 +59,7 @@ void apouche::HttpResponse::setVersion(const std::string &version) {
 apouche::HttpResponse::HttpResponse(apouche::IHttpHeader *header, apouche::IHttpBody *body, const std::string &version)
   : _header (header)
   , _body (body)
+  , _version (version)
 {
 }
 
