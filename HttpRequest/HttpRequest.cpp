@@ -100,14 +100,14 @@ apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody
     setURI(token);
 
     // Get URI parameters
-    unsigned long start = token.find("?");
-    std::string value = token.substr(start + 1, token.size());
+    size_t pos = token.find("?");
+    std::string value = token.substr(pos + 1, token.size());
 
     std::istringstream sss(value);
     while(std::getline(sss, token, '&')) {
         if (token.empty())
             break;
-        unsigned long pos = token.find('=');
+        pos = token.find('=');
         std::string key = token.substr(0, pos);
         std::string value = token.substr(pos + 1, token.size());
         _uriParameters[key] = value;
@@ -123,7 +123,7 @@ apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody
     while(std::getline(ss, token, '\n')) {
         if (token.empty())
             break;
-        unsigned long pos = token.find(": ");
+        pos = token.find(": ");
         std::string key = token.substr(0, pos);
         std::string value = token.substr(pos + 2, token.size());
         map[key] = value;

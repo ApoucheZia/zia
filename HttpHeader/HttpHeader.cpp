@@ -11,7 +11,7 @@ namespace
     return a.size() == b.size()
 	   && std::equal(a.begin(), a.end(), b.begin(), [](char charA, char charB) -> bool
     {
-      return std::tolower(charA) == std::tolower(charB);
+      return ::tolower(charA) == ::tolower(charB);
     });
   }
 }
