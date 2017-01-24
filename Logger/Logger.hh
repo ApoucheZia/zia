@@ -6,8 +6,8 @@
 #define ZIA_LOGGER_HH
 
 /*!
- * \file Logger.hh
- * \brief Simple logger class
+ * \file HttpHeader.hh
+ * \brief Http Object Header, contains header of a request or response
  * \author Julien Karst
  * \version 0.1
  */

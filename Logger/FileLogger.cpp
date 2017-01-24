@@ -3,6 +3,7 @@
 //
 
 #include "FileLogger.hh"
+#include <iostream>
 
 /*
 apouche::FileLogger::~FileLogger() {
@@ -10,12 +11,12 @@ apouche::FileLogger::~FileLogger() {
 
 apouche::FileLogger::FileLogger() {
     _filename = "server.log";
-    _file.open(_filename);
+    _file.open(_filename, std::ios::out);
 }
 
 apouche::FileLogger::FileLogger(const std::string &file) {
     _filename = file;
-    _file.open(_filename);
+    _file.open(_filename, std::ios::out);
 }
 
 void apouche::FileLogger::clearFile() {
