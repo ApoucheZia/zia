@@ -12,8 +12,8 @@
  * \version 0.1
  */
 
-#include "../HttpHeader/IHttpHeader.hh"
-#include "../HttpBody/IHttpBody.hh"
+#include "HttpHeader/IHttpHeader.hh"
+#include "HttpBody/IHttpBody.hh"
 
 /*! \namespace apouche
  *

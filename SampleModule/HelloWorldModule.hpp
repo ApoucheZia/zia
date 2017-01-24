@@ -24,7 +24,7 @@ namespace apouche {
             /* Bind de la méthode membre pour l'interpretation par l'événement*/
             auto function = std::bind(&HelloWorldModule::hello_world, this);
             /*Création de l'événement avec la fonction créée*/
-            Event<void> _event("HelloWorldEvent", Weight::HIGHEST, function);
+            Event<> _event("HelloWorldEvent", Weight::HIGHEST, function);
             /*Ajout de l'événement dans la liste _voidEventList (définie dans EventHandler)*/
             _handler->_voidEventList.addEvent(_event);
         };

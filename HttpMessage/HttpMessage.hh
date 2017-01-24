@@ -13,8 +13,8 @@
  */
 
 
-#include "../HttpBody/IHttpBody.hh"
-#include "../HttpHeader/IHttpHeader.hh"
+#include "HttpBody/IHttpBody.hh"
+#include "HttpHeader/IHttpHeader.hh"
 #include "IHttpMessage.hh"
 
 /*! \namespace apouche

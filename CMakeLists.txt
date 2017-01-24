@@ -3,6 +3,8 @@ project(zia)
 
 set(CMAKE_CXX_STANDARD 11)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 set(SOURCE_FILES
     Event/Event.hpp
     EventHandler/EventHandler.hpp

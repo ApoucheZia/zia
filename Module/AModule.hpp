@@ -13,8 +13,8 @@
  */
 
 #include <string>
-#include "../EventHandler/EventHandler.hpp"
-#include "../Logger/Logger.hh"
+#include "EventHandler/EventHandler.hpp"
+#include "Logger/Logger.hh"
 
 /*! \namespace apouche
  *
@@ -40,7 +40,7 @@ namespace apouche {
         *
         *  Constructor of Module
         */
-        AModule(const std::string name, const std::string desc, const std::string version): _name(name), _desc(desc), _version(version){
+        AModule(const std::string &name, const std::string &desc, const std::string &version): _name(name), _desc(desc), _version(version){
             _logger.info("Module '" + _name + "' (" + _desc + ") v" + _version + " Registering ...");
         };
         /*!

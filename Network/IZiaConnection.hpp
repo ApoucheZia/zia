@@ -9,8 +9,8 @@
 #define ZIA_IZIACONNECTION_HPP
 
 #include <vector>
-#include "../HttpResponse/IHttpResponse.hh"
-#include "../HttpRequest/IHttpRequest.hh"
+#include "HttpResponse/IHttpResponse.hh"
+#include "HttpRequest/IHttpRequest.hh"
 
 namespace apouche
 {

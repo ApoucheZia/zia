@@ -14,10 +14,10 @@
 
 
 #include <string>
-#include "../Enum.hh"
-#include "../HttpHeader/IHttpHeader.hh"
-#include "../HttpBody/IHttpBody.hh"
-#include "../HttpMessage/IHttpMessage.hh"
+#include "Enum.hh"
+#include "HttpHeader/IHttpHeader.hh"
+#include "HttpBody/IHttpBody.hh"
+#include "HttpMessage/IHttpMessage.hh"
 
 /*! \namespace apouche
  *

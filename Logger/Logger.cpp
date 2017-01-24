@@ -2,8 +2,8 @@
 // Created by mart_- on 05/01/17.
 //
 
-#include "Logger.hh"
 #include <iostream>
+#include "Logger.hh"
 
 void apouche::Logger::debug(const std::string &message) {
     write("[DEBUG] " + message);

@@ -3,8 +3,8 @@
 //
 
 #include "HttpRequest.hh"
-#include "../HttpHeader/HttpHeader.hh"
-#include "../HttpBody/HttpBody.hh"
+#include "HttpHeader/HttpHeader.hh"
+#include "HttpBody/HttpBody.hh"
 
 void HttpRequestTest() {
     apouche::HttpRequest *request;
