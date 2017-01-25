@@ -52,6 +52,12 @@ namespace apouche
          * @return The internal list of requests freshly received
          */
         virtual std::vector<IHttpRequest *> const &getRequests() const = 0;
+
+        /**
+         * @brief Get the next request pending inside the Connection
+         * @return A new HttpRequest
+         */
+        virtual IHttpRequest    *getNextRequest() = 0;
     };
 }
 
