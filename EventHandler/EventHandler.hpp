@@ -35,9 +35,9 @@ namespace apouche {
     public:
         EventList<void(IHttpConf *, INetworkStatus *)> _onNetworkIO; // will handle network input/output operations
         EventList<void(IZiaConnection *, IHttpConf *)> _afterConnect;
-        EventList<void(IHttpRequest *, IHttpConf *)> _requestReceived;
-        EventList<void(IHttpRequest *, IHttpConf *)> _beforeParsingRequest;
+        EventList<void(IHttpConf *)> _beforeParsingRequest;
         EventList<void(IHttpRequest *, IHttpConf *)> _afterParsingRequest;
+        EventList<void(IHttpRequest *, IHttpConf *, IZiaConnection *)> _requestReceived;
         EventList<void(IHttpRequest *, IHttpConf *)> _beforeCreateResponse;
         EventList<void(IHttpRequest *, IHttpResponse *, IHttpConf *)> _afterCreateResponse;
         EventList<bool(IHttpResponse *, IHttpConf *)> _beforeSendResponse;
