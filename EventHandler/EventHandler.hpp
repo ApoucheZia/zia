@@ -43,6 +43,22 @@ namespace apouche {
         EventList<bool(IHttpResponse *, IHttpConf *)> _beforeSendResponse;
         EventList<void(IZiaConnection*)> _afterSendResponse;
         EventList<> _voidEventList;
+
+        /*
+         * Clear All EventLists
+         */
+        void clear() {
+            _onNetworkIO.clear();
+            _afterConnect.clear();
+            _requestReceived.clear();
+            _beforeParsingRequest.clear();
+            _afterParsingRequest.clear();
+            _beforeCreateResponse.clear();
+            _afterCreateResponse.clear();
+            _beforeSendResponse.clear();
+            _afterSendResponse.clear();
+            _voidEventList.clear();
+        }
     };
 }
 

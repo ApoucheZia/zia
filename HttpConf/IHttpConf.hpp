@@ -82,7 +82,7 @@ namespace apouche {
             *  \return true if the key is in the header,
             * false if the key is not in the header
             */
-		virtual const	bool containsConf(const std::string &) const = 0;
+        virtual const bool containsConf(const std::string &) const = 0;
 		/*!
             *  \brief Update the configuration in the file
             *

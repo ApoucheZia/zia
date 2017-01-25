@@ -36,12 +36,6 @@ namespace apouche {
         typedef std::function<T> callback;
     };
 
-//    template <>
-//    struct Helper<void>
-//    {
-//        typedef std::function<void()> callback;
-//    };
-
     /*! \class EventList
     * \brief class that represent an EventList
     *
@@ -211,7 +205,7 @@ namespace apouche {
             for (auto &&it : _event) {
                 fct(it.getFunction()(args...));
             }
-            _event.clear();
+         //   _event.clear();
         }
         /*!
         *  \brief Call all the Events
@@ -226,6 +220,17 @@ namespace apouche {
             for (auto &&it : _event) {
                 it.getFunction()(args...);
             }
+         //   _event.clear();
+        }
+        /*!
+        *  \brief Clear all the Events
+        *
+        *  Clear all the events
+        *
+        *  \return void
+        */
+        template< class ...Args>
+        void clear(){
             _event.clear();
         }
     };

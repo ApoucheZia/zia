@@ -8,7 +8,7 @@
 /*!
  * \file HttpHeader.hh
  * \brief Http Object Header, contains header of a request or response
- * \author Kevin Mallot
+ * \author Kevin Malot
  * \version 0.1
  */
 
@@ -20,6 +20,7 @@
  *
  * namespace that contains all http component
  */
+
 namespace apouche {
     /*! \class Abstract AModule
     * \brief class that represent a module abstraction
@@ -33,15 +34,16 @@ namespace apouche {
         *  Destructor of Module
         */
 	virtual ~AModule() {
-            _logger.info("Module '" + _name + "' (" + _desc + ") v" + _version + " Destroying ...");
+            _logger->info("Module '" + _name + "' (" + _desc + ") v" + _version + " Destroying ...");
         };
         /*!
         *  \brief Constructor
         *
         *  Constructor of Module
         */
-        AModule(const std::string &name, const std::string &desc, const std::string &version): _name(name), _desc(desc), _version(version){
-            _logger.info("Module '" + _name + "' (" + _desc + ") v" + _version + " Registering ...");
+        AModule(const std::string name, const std::string desc, const std::string version, apouche::Logger *log = new apouche::Logger())
+            : _name(name), _desc(desc), _version(version), _logger(log){
+            _logger->info("Module '" + _name + "' (" + _desc + ") v" + _version + " Registering ...");
         };
         /*!
             *  \brief Set the name
@@ -120,10 +122,10 @@ namespace apouche {
         virtual void    registerEvents(EventHandler *) = 0;
 
     protected:
-        Logger      _logger;
         std::string _name;
         std::string _desc;
         std::string _version;
+        Logger      *_logger;
     };
 }
 

@@ -6,6 +6,7 @@
 #define ZIA_EVENT_HPP
 
 #include "Enum.hh"
+#include <functional>
 
 /*!
  * \file Event.hpp

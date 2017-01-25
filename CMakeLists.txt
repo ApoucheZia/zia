@@ -21,23 +21,18 @@ set(SOURCE_FILES
     HttpMessage/IHttpMessage.hh
     HttpRequest/HttpRequest.cpp
     HttpRequest/HttpRequest.hh
-    HttpRequest/HttpRequestTest.cpp
-    HttpRequest/IHttpRequest.hh
+        HttpRequest/IHttpRequest.hh
     HttpResponse/HttpResponse.cpp
     HttpResponse/HttpResponse.hh
     HttpResponse/IHttpResponse.hh
     Logger/FileLogger.cpp
     Logger/FileLogger.hh
-    Logger/FileLoggerTest.cpp
-    Logger/Logger.cpp
+        Logger/Logger.cpp
     Logger/Logger.hh
     Module/AModule.hpp
     Network/INetworkStatus.hpp
     Network/IZiaConnection.hpp
-    SampleModule/RequestInfoPrintingModule.hpp
-    SampleModule/ResponseRewritingModule.hpp
     Enum.hh
-    main.cpp
-    README.md)
+    main.cpp)
 
 add_executable(zia ${SOURCE_FILES})

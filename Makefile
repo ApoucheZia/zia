@@ -1,37 +1,27 @@
-##
-## Makefile for  in /home/mart_-/Downloads/zia
-## 
-## Made by mart_-
-## Login   <mart_-@epitech.net>
-## 
-## Started on  Tue Jan 10 10:01:27 2017 mart_-
-## Last update Tue Jan 10 10:01:27 2017 mart_-
-##
+SRC= Event/Event.hpp \
+    EventHandler/EventHandler.hpp \
+    EventList/EventList.hpp \
+    HttpBody/HttpBody.cpp \
+    HttpConf/IHttpConf.hpp \
+    HttpHeader/HttpHeader.cpp \
+    HttpMessage/HttpMessage.cpp \
+    HttpRequest/HttpRequest.cpp \
+    HttpResponse/HttpResponse.cpp \
+    Logger/FileLogger.cpp \
+    Logger/Logger.cpp \
+    Module/AModule.hpp \
+    Network/INetworkStatus.hpp \
+    Network/IZiaConnection.hpp \
 
-CXXFLAGS	+= -std=c++11
+NAME= apouche.so
 
-SRC=	HttpResponse/HttpResponse.cpp \
-	HttpHeader/HttpHeader.cpp \
-	HttpMessage/HttpMessage.cpp \
-	Logger/Logger.cpp \
-	Logger/FileLogger.cpp \
-	HttpBody/HttpBody.cpp \
-	HttpRequest/HttpRequest.cpp \
-	main.cpp
-
-OBJ=	$(SRC:.cpp=.o)
-
-NAME=	apouche
-
-all:	$(NAME)
-
-$(NAME):$(OBJ)
-	g++ -o $(NAME) $(OBJ)
-
+all:
+	g++ -shared -std=c++11 -fpic -x c++ $(SRC) -o $(NAME) -I .
+	
 clean:
-	rm -f $(OBJ)
+	rm -f $(NAME)
 
 fclean:	clean
-	rm -f $(NAME)
+	rm -f ../libs/$(NAME)
 
 re:	fclean all

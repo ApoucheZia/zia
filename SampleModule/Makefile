@@ -2,7 +2,7 @@ SRC= HelloWorldModule.hpp \
 	../Module/AModule.hpp \
 	../Logger/Logger.cpp
 
-NAME= module.so
+NAME= HelloWorldModule.so
 
 all:
 	g++ -shared -std=c++11 -fpic -x c++ $(SRC) -o $(NAME)
