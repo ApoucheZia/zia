@@ -114,8 +114,7 @@ apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody
     }
 
     std::getline(ss, token, '\n');
-    setVersion(token);
-
+    setVersion(token.substr(0, token.size() - 1));
 
     apouche::IHttpHeader *iHttpHeader = getHeaders();
     std::map<std::string, std::string> map;
@@ -125,7 +124,7 @@ apouche::HttpRequest::HttpRequest(const std::string &message, apouche::IHttpBody
             break;
         pos = token.find(": ");
         std::string key = token.substr(0, pos);
-        std::string value = token.substr(pos + 2, token.size());
+        std::string value = token.substr(pos + 2, token.size() - pos - 3);
         map[key] = value;
     }
     iHttpHeader->setAllHeaders(map);
