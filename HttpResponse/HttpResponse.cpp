@@ -18,7 +18,7 @@ void apouche::HttpResponse::setStatus(apouche::StatusCode status) {
 }
 
 const std::string apouche::HttpResponse::getResponseLine() const {
-    return std::to_string(_status) + " " + _message.at(_status);
+    return  _version + " " + std::to_string(_status) + " " + _message.at(_status);
 }
 
 apouche::IHttpHeader *apouche::HttpResponse::getHeaders() {
